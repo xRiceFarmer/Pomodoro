@@ -1,12 +1,7 @@
-//
-//  TimerCardView.swift
-//  Pomodoro
-//
-//  Created by Thái Khang on 15/01/2024.
-//
 
 import SwiftUI
 import ActivityKit
+import Foundation
 
 struct TimerCardView: View {
     @StateObject var pomodoroTimer = PomodoroTimer()
@@ -23,14 +18,17 @@ struct TimerCardView: View {
                 .fill(selectecTab.mainColor)
             VStack {
                 if let endTime {
-                    Text(endTime, style: .relative)
+                    Text.init(timerInterval:  Date.now...Date(timeInterval: 20, since: .now), pauseTime: endTime)
+                        .font(.headline)
+                        .foregroundStyle(.bar)
                 }
                 
                 Circle()
                     .strokeBorder(lineWidth: 24)
                     .overlay {
                         Button(action: {
-                            
+                            //let components = DateComponents(second: 10)
+                            //let futureDate = Calendar.current.date(byAdding: components, to: Date())!
                             isTrackingTime.toggle()
                             
                             if isTrackingTime {
@@ -40,7 +38,8 @@ struct TimerCardView: View {
                                     }
                                 }
                                 
-                                endTime = Date().addingTimeInterval(10)
+                                //endTime = Date().addingTimeInterval(20)
+                                endTime = Date.now
                                 let attributes = TimerAttributes()
                                 guard let endTime else { return }
                                 let state = TimerAttributes.ContentState(endTime: endTime)
