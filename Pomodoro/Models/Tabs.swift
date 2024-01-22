@@ -23,9 +23,9 @@ enum Tab: String, CaseIterable {
     }
     var defaultSecondValue : Int {
         switch self {
-        case .pomodoro: return(100)
-        case .shortBreak: return(100)
-        case .longBreak: return(100)
+        case .pomodoro: return(10)
+        case .shortBreak: return(20)
+        case .longBreak: return(30)
         }
     }
 }

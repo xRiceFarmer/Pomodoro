@@ -27,7 +27,9 @@ struct TimerWidget: Widget {
 struct TimerWidgetView: View {
     let context: ActivityViewContext<TimerAttributes>
     var body: some View {
-        Text.init(timerInterval:  Date.now...Date(timeInterval: 20, since: .now), pauseTime: context.state.endTime)
+        Text.init(timerInterval:  Date.now...Date(timeInterval: Double(context.state.secondsRemaining), since: .now), pauseTime: context.state.endTime)
+            .font(.headline)
+            .padding()
     }
 }
 

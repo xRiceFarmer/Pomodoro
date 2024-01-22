@@ -4,59 +4,54 @@ import ActivityKit
 import Foundation
 
 struct TimerCardView: View {
-    @StateObject var pomodoroTimer = PomodoroTimer()
+    let selectedTab: Tab
+    @State var secondsRemaining: Int
     @State private var isTrackingTime: Bool = false
-    
     @State private var endTime: Date? = nil
-    @State private var activity: Activity<TimerAttributes>? = nil
+    @State private var activity: Activity<TimerAttributes>? = nil    
+    @State private var timer: Timer? = nil
+    @State private var isPaused = false
     
-    let selectecTab: Tab
+  
     var body: some View {
         
         ZStack {
             RoundedRectangle(cornerRadius: 16)
-                .fill(selectecTab.mainColor)
+                .fill(selectedTab.mainColor)
             VStack {
-                if let endTime {
-                    Text.init(timerInterval:  Date.now...Date(timeInterval: 20, since: .now), pauseTime: endTime)
-                        .font(.headline)
-                        .foregroundStyle(.bar)
-                }
+                Text("Countdown Timer: \(secondsRemaining) seconds")
+                    .padding()
                 
                 Circle()
                     .strokeBorder(lineWidth: 24)
                     .overlay {
                         Button(action: {
-                            //let components = DateComponents(second: 10)
-                            //let futureDate = Calendar.current.date(byAdding: components, to: Date())!
                             isTrackingTime.toggle()
-                            
                             if isTrackingTime {
+                                startCountdown()
+                                
+                                // stop all running live activities
                                 for activity in Activity<TimerAttributes>.activities {
                                     Task {
                                         await activity.end(nil, dismissalPolicy: .immediate)
                                     }
                                 }
                                 
-                                //endTime = Date().addingTimeInterval(20)
+                                
                                 endTime = Date.now
                                 let attributes = TimerAttributes()
                                 guard let endTime else { return }
-                                let state = TimerAttributes.ContentState(endTime: endTime)
+                                let state = TimerAttributes.ContentState(endTime: endTime, secondsRemaining: secondsRemaining)
                                 let content = ActivityContent(state: state, staleDate: nil)
                                 activity = try? Activity.request(attributes: attributes, content: content, pushType: nil)
                                 
                                 
                             } else {
-                                
-                                
                                 guard let endTime else { return }
-                                let finalState = TimerAttributes.ContentState(endTime: endTime)
+                                let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(secondsRemaining) + 1), secondsRemaining: secondsRemaining)
                                 Task {
-                                    await activity?.end(ActivityContent(state: finalState, staleDate: .now), dismissalPolicy: .immediate)
-                                    print("attempted to end activity")
+                                    await activity?.end(ActivityContent(state: finalState, staleDate: .now), dismissalPolicy: ActivityUIDismissalPolicy.default)
                                 }
-                                print("isTrackingTime: \(isTrackingTime)")
                                 self.endTime = nil
                             }
                         }) {
@@ -66,13 +61,44 @@ struct TimerCardView: View {
                                 .frame(width: 100, height: 100)
                                 .foregroundColor(.white)
                         }
+                        .padding()
                     }
+                Button(action:{
+                    secondsRemaining = selectedTab.defaultSecondValue
+                    isTrackingTime = false
+                    let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(secondsRemaining) + 1), secondsRemaining: secondsRemaining)
+                    Task {
+                        await activity?.end(ActivityContent(state: finalState, staleDate: .now), dismissalPolicy: ActivityUIDismissalPolicy.default)
+                    }
+                }){
+                    Text("Reset")
+                        .foregroundStyle(.white)
+                        .padding(.top)
+                }
                 .padding()
+                
+            }
+        }
+    }
+    private func startCountdown() {
+        // Invalidate the existing timer if any
+        timer?.invalidate()
+
+        // Create and start a new timer
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if isTrackingTime {
+                if secondsRemaining > 0 {
+                    secondsRemaining -= 1
+                } else {
+                    // Timer reached zero, perform additional actions if needed
+                    timer?.invalidate()
+                }
             }
         }
     }
 }
 
+
 #Preview {
-    TimerCardView(selectecTab: .pomodoro)
+    TimerCardView(selectedTab: .pomodoro, secondsRemaining: 20)
 }

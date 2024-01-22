@@ -14,7 +14,7 @@ struct ContentView: View {
             VStack{
                 TabView(selection: $selectedTab){
                     ForEach(Tab.allCases, id: \.rawValue){ tab in
-                        TimerCardView(selectecTab: tab)
+                        TimerCardView(selectedTab: tab, secondsRemaining: tab.defaultSecondValue)
                             .tag(tab)
                             .padding()
                     }
@@ -25,8 +25,8 @@ struct ContentView: View {
             CustomTabBar(selectedTab: $selectedTab)
             .navigationTitle("Pomodoro Timer")
             .toolbar{
-                Button(action:{}){Image(systemName: "plus")}
-                Button(action:{}){Text("Reset")}
+                //Button(action:{}){Image(systemName: "plus")}
+                Button(action:{}){Text("Edit")}
 
             }
         }
