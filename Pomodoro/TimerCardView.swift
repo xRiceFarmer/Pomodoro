@@ -64,20 +64,22 @@ struct TimerCardView: View {
                         .padding()
                     }
                 Button(action:{
-                    secondsRemaining = selectedTab.defaultSecondValue
-                    isTrackingTime = false
-                    let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(secondsRemaining) + 1), secondsRemaining: secondsRemaining)
-                    Task {
-                        await activity?.end(ActivityContent(state: finalState, staleDate: .now), dismissalPolicy: ActivityUIDismissalPolicy.default)
-                    }
+                    resetTimer()
                 }){
                     Text("Reset")
                         .foregroundStyle(.white)
                         .padding(.top)
                 }
                 .padding()
-                
             }
+        }
+    }
+    private func resetTimer(){
+        secondsRemaining = selectedTab.defaultSecondValue
+        isTrackingTime = false
+        let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(secondsRemaining) + 1), secondsRemaining: secondsRemaining)
+        Task {
+            await activity?.end(ActivityContent(state: finalState, staleDate: .now), dismissalPolicy: ActivityUIDismissalPolicy.default)
         }
     }
     private func startCountdown() {
