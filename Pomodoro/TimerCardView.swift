@@ -4,11 +4,11 @@ import ActivityKit
 import Foundation
 
 struct TimerCardView: View {
-    let selectedTab: Tab
+    @Binding var selectedTab: TabDetails
     @State var secondsRemaining: Int
     @State private var isTrackingTime: Bool = false
     @State private var endTime: Date? = nil
-    @State private var activity: Activity<TimerAttributes>? = nil    
+    @State private var activity: Activity<TimerAttributes>? = nil
     @State private var timer: Timer? = nil
     @State private var isPaused = false
     
@@ -17,7 +17,7 @@ struct TimerCardView: View {
         
         ZStack {
             RoundedRectangle(cornerRadius: 16)
-                .fill(selectedTab.mainColor)
+                .fill(selectedTab.theme.mainColor)
             VStack {
                 Text("Countdown Timer: \(secondsRemaining) seconds")
                     .padding()
@@ -47,12 +47,7 @@ struct TimerCardView: View {
                                 
                                 
                             } else {
-                                guard let endTime else { return }
-                                let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(secondsRemaining) + 1), secondsRemaining: secondsRemaining)
-                                Task {
-                                    await activity?.end(ActivityContent(state: finalState, staleDate: .now), dismissalPolicy: ActivityUIDismissalPolicy.default)
-                                }
-                                self.endTime = nil
+                                stopTimer()
                             }
                         }) {
                             Image(systemName: isTrackingTime ? "stop.circle.fill" : "play.circle.fill")
@@ -73,9 +68,21 @@ struct TimerCardView: View {
                 .padding()
             }
         }
+        .onDisappear(){
+            isTrackingTime = false
+            stopTimer()
+        }
+    }
+    private func stopTimer(){
+        guard let endTime else { return }
+        let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(secondsRemaining) + 1), secondsRemaining: secondsRemaining)
+        Task {
+            await activity?.end(ActivityContent(state: finalState, staleDate: .now), dismissalPolicy: ActivityUIDismissalPolicy.default)
+        }
+        self.endTime = nil
     }
     private func resetTimer(){
-        secondsRemaining = selectedTab.defaultSecondValue
+        secondsRemaining = selectedTab.lengthInMinutes
         isTrackingTime = false
         let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(secondsRemaining) + 1), secondsRemaining: secondsRemaining)
         Task {
@@ -102,5 +109,5 @@ struct TimerCardView: View {
 
 
 #Preview {
-    TimerCardView(selectedTab: .pomodoro, secondsRemaining: 20)
+    TimerCardView(selectedTab: .constant(TabDetails.defaultData[0]), secondsRemaining: 20)
 }

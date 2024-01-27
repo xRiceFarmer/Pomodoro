@@ -1,10 +1,13 @@
 import Foundation
-struct TabDetails {
+import SwiftUI
+struct TabDetails: Codable, Identifiable, Hashable {
+    let id: UUID
     var name : String
-    var theme : String
+    var theme : Theme
     var lengthInMinutes: Int
     
-    init(name: String, theme: String, lengthInMinutes: Int) {
+    init(id: UUID = UUID(), name: String, theme: Theme, lengthInMinutes: Int) {
+        self.id = id
         self.name = name
         self.theme = theme
         self.lengthInMinutes = lengthInMinutes
@@ -12,8 +15,8 @@ struct TabDetails {
 }
 extension TabDetails{
     static let defaultData: [TabDetails] = [
-        TabDetails(name: "Pomodoro", theme: ".blue", lengthInMinutes: 25),
-        TabDetails(name: "Short Break", theme: ".red", lengthInMinutes: 5),
-        TabDetails(name: "Long Break", theme: ".green", lengthInMinutes: 10)
+        TabDetails(name: "Pomodoro", theme: .magenta, lengthInMinutes: 25),
+        TabDetails(name: "Short Break", theme: .periwinkle, lengthInMinutes: 5),
+        TabDetails(name: "Long Break", theme: .bubblegum, lengthInMinutes: 10)
     ]
 }

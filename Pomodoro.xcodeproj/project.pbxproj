@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0C2287462B5AD7C000951D4D /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9BDA3F2B5982A20031B6AF /* TimerAttributes.swift */; };
 		0C2287472B5AD7DB00951D4D /* TimerWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9BDA512B5AD3990031B6AF /* TimerWidget.swift */; };
+		0C2287642B5ECB3000951D4D /* DetailEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2287632B5ECB3000951D4D /* DetailEditView.swift */; };
 		0C90816E2B5610D300B1AA9D /* PomodoroTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C90816D2B5610D300B1AA9D /* PomodoroTimer.swift */; };
 		0C9BDA402B5982A20031B6AF /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9BDA3F2B5982A20031B6AF /* TimerAttributes.swift */; };
 		0C9BDA4C2B5AD3990031B6AF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C9BDA2A2B597F070031B6AF /* WidgetKit.framework */; };
@@ -17,14 +18,19 @@
 		0C9BDA542B5AD39A0031B6AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C9BDA532B5AD39A0031B6AF /* Assets.xcassets */; };
 		0C9BDA582B5AD39A0031B6AF /* TimerWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0C9BDA4B2B5AD3990031B6AF /* TimerWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0C9BDA5C2B5AD3BA0031B6AF /* TimerWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9BDA512B5AD3990031B6AF /* TimerWidget.swift */; };
+		0CAC838B2B62A74D00BE57E5 /* TabDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAC838A2B62A74D00BE57E5 /* TabDetails.swift */; };
 		0CD8349B2B54E4B400FD2C3B /* PomodoroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD8349A2B54E4B400FD2C3B /* PomodoroApp.swift */; };
 		0CD8349D2B54E4B400FD2C3B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD8349C2B54E4B400FD2C3B /* ContentView.swift */; };
-		0CD8349F2B54E4B500FD2C3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CD8349E2B54E4B500FD2C3B /* Assets.xcassets */; };
 		0CD834A22B54E4B500FD2C3B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CD834A12B54E4B500FD2C3B /* Preview Assets.xcassets */; };
 		0CD834A92B54F15700FD2C3B /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD834A82B54F15700FD2C3B /* TabView.swift */; };
 		0CD834AB2B54F2F300FD2C3B /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD834AA2B54F2F300FD2C3B /* CustomTabBar.swift */; };
 		0CD834AF2B54F56500FD2C3B /* TimerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD834AE2B54F56500FD2C3B /* TimerCardView.swift */; };
 		0CD834B22B55028500FD2C3B /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD834B12B55028500FD2C3B /* Tabs.swift */; };
+		0CE13EA72B6388050090FB5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CE13EA62B6388050090FB5E /* Assets.xcassets */; };
+		0CE13EA92B6388360090FB5E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE13EA82B6388360090FB5E /* Theme.swift */; };
+		0CE13EAB2B64915A0090FB5E /* TabStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE13EAA2B64915A0090FB5E /* TabStore.swift */; };
+		0CE13EAD2B6494980090FB5E /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE13EAC2B6494980090FB5E /* ErrorWrapper.swift */; };
+		0CE13EAF2B64956F0090FB5E /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE13EAE2B64956F0090FB5E /* ErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +58,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C2287632B5ECB3000951D4D /* DetailEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEditView.swift; sourceTree = "<group>"; };
 		0C90816D2B5610D300B1AA9D /* PomodoroTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimer.swift; sourceTree = "<group>"; };
 		0C9BDA2A2B597F070031B6AF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		0C9BDA2C2B597F070031B6AF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -61,15 +68,20 @@
 		0C9BDA512B5AD3990031B6AF /* TimerWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWidget.swift; sourceTree = "<group>"; };
 		0C9BDA532B5AD39A0031B6AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C9BDA552B5AD39A0031B6AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0CAC838A2B62A74D00BE57E5 /* TabDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabDetails.swift; sourceTree = "<group>"; };
 		0CD834972B54E4B400FD2C3B /* Pomodoro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodoro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CD8349A2B54E4B400FD2C3B /* PomodoroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroApp.swift; sourceTree = "<group>"; };
 		0CD8349C2B54E4B400FD2C3B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		0CD8349E2B54E4B500FD2C3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0CD834A12B54E4B500FD2C3B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0CD834A82B54F15700FD2C3B /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		0CD834AA2B54F2F300FD2C3B /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		0CD834AE2B54F56500FD2C3B /* TimerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCardView.swift; sourceTree = "<group>"; };
 		0CD834B12B55028500FD2C3B /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
+		0CE13EA62B6388050090FB5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../Scrumdinger/Scrumdinger/Assets.xcassets; sourceTree = "<group>"; };
+		0CE13EA82B6388360090FB5E /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		0CE13EAA2B64915A0090FB5E /* TabStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabStore.swift; sourceTree = "<group>"; };
+		0CE13EAC2B6494980090FB5E /* ErrorWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
+		0CE13EAE2B64956F0090FB5E /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +127,7 @@
 		0CD8348E2B54E4B400FD2C3B = {
 			isa = PBXGroup;
 			children = (
+				0CAC838A2B62A74D00BE57E5 /* TabDetails.swift */,
 				0CD834992B54E4B400FD2C3B /* Pomodoro */,
 				0C9BDA4E2B5AD3990031B6AF /* TimerWidget */,
 				0C9BDA292B597F070031B6AF /* Frameworks */,
@@ -137,11 +150,13 @@
 				0CD8349A2B54E4B400FD2C3B /* PomodoroApp.swift */,
 				0C9BDA3F2B5982A20031B6AF /* TimerAttributes.swift */,
 				0CD8349C2B54E4B400FD2C3B /* ContentView.swift */,
+				0C2287632B5ECB3000951D4D /* DetailEditView.swift */,
 				0CD834AE2B54F56500FD2C3B /* TimerCardView.swift */,
 				0CD834A82B54F15700FD2C3B /* TabView.swift */,
+				0CE13EAE2B64956F0090FB5E /* ErrorView.swift */,
 				0CD834AA2B54F2F300FD2C3B /* CustomTabBar.swift */,
 				0CD834B02B54F5FF00FD2C3B /* Models */,
-				0CD8349E2B54E4B500FD2C3B /* Assets.xcassets */,
+				0CE13EA62B6388050090FB5E /* Assets.xcassets */,
 				0CD834A02B54E4B500FD2C3B /* Preview Content */,
 			);
 			path = Pomodoro;
@@ -158,8 +173,11 @@
 		0CD834B02B54F5FF00FD2C3B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0CE13EAC2B6494980090FB5E /* ErrorWrapper.swift */,
 				0CD834B12B55028500FD2C3B /* Tabs.swift */,
+				0CE13EA82B6388360090FB5E /* Theme.swift */,
 				0C90816D2B5610D300B1AA9D /* PomodoroTimer.swift */,
+				0CE13EAA2B64915A0090FB5E /* TabStore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -254,7 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CD834A22B54E4B500FD2C3B /* Preview Assets.xcassets in Resources */,
-				0CD8349F2B54E4B500FD2C3B /* Assets.xcassets in Resources */,
+				0CE13EA72B6388050090FB5E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,8 +300,14 @@
 				0C90816E2B5610D300B1AA9D /* PomodoroTimer.swift in Sources */,
 				0CD834A92B54F15700FD2C3B /* TabView.swift in Sources */,
 				0CD834AF2B54F56500FD2C3B /* TimerCardView.swift in Sources */,
+				0C2287642B5ECB3000951D4D /* DetailEditView.swift in Sources */,
+				0CE13EAD2B6494980090FB5E /* ErrorWrapper.swift in Sources */,
 				0CD8349B2B54E4B400FD2C3B /* PomodoroApp.swift in Sources */,
+				0CE13EAF2B64956F0090FB5E /* ErrorView.swift in Sources */,
+				0CE13EA92B6388360090FB5E /* Theme.swift in Sources */,
+				0CAC838B2B62A74D00BE57E5 /* TabDetails.swift in Sources */,
 				0CD834B22B55028500FD2C3B /* Tabs.swift in Sources */,
+				0CE13EAB2B64915A0090FB5E /* TabStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
