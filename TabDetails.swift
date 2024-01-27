@@ -4,6 +4,14 @@ struct TabDetails: Codable, Identifiable, Hashable {
     let id: UUID
     var name : String
     var theme : Theme
+    var lengthInMinutesAsDoubles: Double{
+        get {
+            Double(lengthInMinutes)
+        }
+        set {
+            lengthInMinutes = Int(newValue)
+        }
+    }
     var lengthInMinutes: Int
     
     init(id: UUID = UUID(), name: String, theme: Theme, lengthInMinutes: Int) {

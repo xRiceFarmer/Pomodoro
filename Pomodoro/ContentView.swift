@@ -2,36 +2,53 @@ import SwiftUI
 struct ContentView: View {
     //@State private var selectedTab: TabDetails = TabDetails.defaultData[0]
     //@State var tabDetails: [TabDetails] = TabDetails.defaultData
+    @State private var editingTab = TabDetails.defaultData
     @State private var isPresentingEditView = false
     @Binding var tabs : [TabDetails]
-    @State var selectedTab : TabDetails
+    @State var selectedTabIndex : Int = 0
     
     @Environment(\.scenePhase) private var scenePhase
     let saveAction: ()->Void
     var body: some View {
         NavigationStack {
             VStack{
-                TabView(selection: $selectedTab){
-                    ForEach($tabs)  {$tab in
-                        TimerCardView(selectedTab: $tab, secondsRemaining: tab.lengthInMinutes)
-                            .tag(tab)
+                TabView(selection: $selectedTabIndex){
+                    ForEach(tabs.indices, id: \.self)  {index in
+                        TimerCardView(selectedTab: $tabs[index], secondsRemaining: $tabs[index].lengthInMinutes)
+                            .tag(index)
                             .padding()
                     }
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
                 .frame(maxHeight: .infinity)
             }
-            CustomTabBar(selectedTab: $selectedTab, tabDetails: tabs)
+            CustomTabBar(selectedTabIndex: $selectedTabIndex, tabDetails: tabs)
             .navigationTitle("Pomodoro Timer")
             .toolbar{
                 //Button(action:{}){Image(systemName: "plus")}
                 Button("Edit"){
                     isPresentingEditView = true
+                    editingTab = tabs
                 }
             }
             .sheet(isPresented: $isPresentingEditView){
                 NavigationStack{
-                    DetailEditView()
+                    DetailEditView(tabs: $editingTab)
+                        .navigationTitle(Text("Duration and Themes"))
+                        .toolbar{
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button("Cancel"){
+                                    isPresentingEditView = false
+                                }
+                            }
+                            ToolbarItem(placement: .confirmationAction){
+                                Button("Done"){
+                                    isPresentingEditView = false
+                                    tabs = editingTab
+                                }
+                            }
+                        }
                 }
             }
         }
@@ -42,6 +59,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(tabs: .constant(TabDetails.defaultData), selectedTab: TabDetails.defaultData[0], saveAction: {})
+    ContentView(tabs: .constant(TabDetails.defaultData),  saveAction: {})
 }
 

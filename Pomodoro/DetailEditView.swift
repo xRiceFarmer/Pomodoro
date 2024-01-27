@@ -8,43 +8,30 @@
 import SwiftUI
 
 struct DetailEditView: View {
-    @State private var editedPomodoroSeconds: Int = Tab.pomodoro.defaultSecondValue
-        @State private var editedShortBreakSeconds: Int = Tab.shortBreak.defaultSecondValue
-        @State private var editedLongBreakSeconds: Int = Tab.longBreak.defaultSecondValue
+    @Binding var tabs: [TabDetails]
+    //@State private var editedPomodoroSeconds: Int = Tab.pomodoro.defaultSecondValue
+       // @State private var editedShortBreakSeconds: Int = Tab.shortBreak.defaultSecondValue
+        //@State private var editedLongBreakSeconds: Int = Tab.longBreak.defaultSecondValue
 
-        var body: some View {
-            NavigationView {
-                Form {
-                    Section(header: Text("Edit Default Seconds")) {
-                        Stepper(value: $editedPomodoroSeconds, in: 1...120) {
-                            Text("Pomodoro Seconds: \(editedPomodoroSeconds)")
+    var body: some View {
+        Form {
+            ForEach(tabs.indices, id: \.self) {index in
+                Section(header: Text(tabs[index].name)){
+                    HStack{
+                        Slider(value: $tabs[index].lengthInMinutesAsDoubles, in: 5...30, step: 1){
+                            Text("Length")
                         }
-
-                        Stepper(value: $editedShortBreakSeconds, in: 1...120) {
-                            Text("Short Break Seconds: \(editedShortBreakSeconds)")
-                        }
-
-                        Stepper(value: $editedLongBreakSeconds, in: 1...120) {
-                            Text("Long Break Seconds: \(editedLongBreakSeconds)")
-                        }
-                    }
-
-                    Section {
-                        Button("Save") {
-                            // Handle save action (update defaultSecondValue for all tabs)
-                            //Tab.pomodoro.defaultSecondValue = editedPomodoroSeconds
-                            //Tab.shortBreak.defaultSecondValue = editedShortBreakSeconds
-                            //Tab.longBreak.defaultSecondValue = editedLongBreakSeconds
-
-                            print("Saved default seconds")
-                        }
+                        .accessibilityValue("\(tabs[index].lengthInMinutes) minutes")
+                        Spacer()
+                        Text("\(tabs[index].lengthInMinutes) minutes")
+                            .accessibilityHidden(true)
                     }
                 }
-                .navigationTitle("Edit Default Seconds")
             }
         }
+    }
 }
 
 #Preview {
-    DetailEditView()
+    DetailEditView(tabs: .constant(TabDetails.defaultData))
 }

@@ -5,7 +5,7 @@ import Foundation
 
 struct TimerCardView: View {
     @Binding var selectedTab: TabDetails
-    @State var secondsRemaining: Int
+    @Binding var secondsRemaining: Int
     @State private var isTrackingTime: Bool = false
     @State private var endTime: Date? = nil
     @State private var activity: Activity<TimerAttributes>? = nil
@@ -82,7 +82,7 @@ struct TimerCardView: View {
         self.endTime = nil
     }
     private func resetTimer(){
-        secondsRemaining = selectedTab.lengthInMinutes
+        secondsRemaining = selectedTab.lengthInMinutes*60
         isTrackingTime = false
         let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(secondsRemaining) + 1), secondsRemaining: secondsRemaining)
         Task {
@@ -109,5 +109,5 @@ struct TimerCardView: View {
 
 
 #Preview {
-    TimerCardView(selectedTab: .constant(TabDetails.defaultData[0]), secondsRemaining: 20)
+    TimerCardView(selectedTab: .constant(TabDetails.defaultData[0]), secondsRemaining: .constant(20))
 }

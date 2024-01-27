@@ -13,7 +13,7 @@ struct PomodoroApp: App {
     @State private var errorWrapper: ErrorWrapper?
     var body: some Scene {
         WindowGroup {
-            ContentView(tabs: $store.tabs, selectedTab: store.tabs[0]){
+            ContentView(tabs: $store.tabs){
                 Task{
                     do {
                         try await store.save(tabs: store.tabs)

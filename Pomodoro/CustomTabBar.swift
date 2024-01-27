@@ -1,20 +1,20 @@
 import SwiftUI
 
 struct CustomTabBar: View {
-    @Binding var selectedTab: TabDetails
+    @Binding var selectedTabIndex: Int
     @State var tabDetails: [TabDetails]
 
     
     var body: some View {
         VStack {
             HStack {
-                ForEach(tabDetails) { tab in
+                ForEach(tabDetails.indices, id: \.self) { index in
                     Spacer()
-                    Text(tab.name)
-                        .font(.system(size: 16, weight: selectedTab == tab ? .bold : .regular)) // Use bold font when selected
-                        .foregroundColor(selectedTab == tab ? .blue : .black)
+                    Text(tabDetails[index].name)
+                        .font(.system(size: 16, weight: tabDetails[selectedTabIndex] == tabDetails[index] ? .bold : .regular)) // Use bold font when selected
+                        .foregroundColor(tabDetails[selectedTabIndex] == tabDetails[index] ? .blue : .black)
                         .onTapGesture {
-                            selectedTab = tab
+                            selectedTabIndex = index
                         }
                     Spacer()
                 }
@@ -30,6 +30,6 @@ struct CustomTabBar: View {
 
 struct CustomTabBar_Previews: PreviewProvider {
     static var previews: some View {
-        CustomTabBar(selectedTab: .constant(TabDetails.defaultData[0]), tabDetails: TabDetails.defaultData)
+        CustomTabBar(selectedTabIndex: .constant(0), tabDetails: TabDetails.defaultData)
     }
 }
