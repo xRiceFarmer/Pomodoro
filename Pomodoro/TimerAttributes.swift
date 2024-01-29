@@ -7,5 +7,6 @@ struct TimerAttributes: ActivityAttributes{
     public struct ContentState: Codable, Hashable {
         var endTime: Date
         var secondsRemaining: Int
+        var sessionName: String
     }
 }

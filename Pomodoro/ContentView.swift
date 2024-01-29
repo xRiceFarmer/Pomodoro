@@ -14,7 +14,7 @@ struct ContentView: View {
             VStack{
                 TabView(selection: $selectedTabIndex){
                     ForEach(tabs.indices, id: \.self)  {index in
-                        TimerCardView(selectedTab: $tabs[index], secondsRemaining: $tabs[index].lengthInMinutes)
+                        TimerCardView(selectedTab: $tabs[index], lengthInMinutes: $tabs[index].lengthInMinutes)
                             .tag(index)
                             .padding()
                     }

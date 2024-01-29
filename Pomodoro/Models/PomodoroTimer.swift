@@ -7,25 +7,48 @@
 
 import Foundation
 
-import SwiftUI
+@MainActor
+final class PomodoroTimer: ObservableObject {
+    @Published var secondsElapsed = 0
+    @Published var secondsRemaining = 0
+    
+    private(set) var lengthInMinutes: Int
+    private var lengthInSeconds: Int { lengthInMinutes * 60 }
+    
+    private var frequency: TimeInterval { 1.0 / 60.0 }
 
-class PomodoroTimer: ObservableObject {
-    @Published var secondsElapsed: Int = 0
-    @Published var secondsRemaining: Int = 300
-    var timer: Timer = Timer()
-    func start() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            self.secondsElapsed += 1
-            self.secondsRemaining -= 1
+    private weak var timer: Timer?
+    private var timerStopped = false
+    private var startDate: Date?
+
+    init(lengthInMinutes: Int = 0) {
+        self.lengthInMinutes = lengthInMinutes
+        secondsRemaining = lengthInSeconds
+    }
+
+    func startCountdown() {
+        timer = Timer.scheduledTimer(withTimeInterval: frequency, repeats: true) { [weak self] timer in
+            self?.update()
+        }
+        timer?.tolerance = 0.1
+    }
+    
+    func stopCountdown(){
+        timer?.invalidate()
+        timerStopped = false
+    }
+    nonisolated private func update() {
+
+        Task { @MainActor in
+            guard let startDate,
+                  !timerStopped else { return }
+            let secondsElapsed = Int(Date().timeIntervalSince1970 - startDate.timeIntervalSince1970)
+            secondsRemaining = max(lengthInSeconds - self.secondsElapsed, 0)
         }
     }
-
-    func stop() {
-        timer.invalidate()
-        secondsElapsed = 0
-    }
-
-    func pause() {
-        timer.invalidate()
+    
+    func reset(lengthInMinutes: Int){
+        self.lengthInMinutes = lengthInMinutes
+        secondsRemaining = lengthInSeconds
     }
 }

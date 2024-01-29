@@ -12,10 +12,13 @@ struct TimerWidget: Widget {
                 DynamicIslandExpandedRegion(.leading){
                     Text.init(timerInterval:  Date.now...Date(timeInterval: Double(context.state.secondsRemaining), since: .now), pauseTime: context.state.endTime)
                 }
+                DynamicIslandExpandedRegion(.trailing){
+                    Text(context.state.sessionName)
+                }
             } compactLeading: {
-                Text("Pom")
+                Text.init(timerInterval:  Date.now...Date(timeInterval: Double(context.state.secondsRemaining), since: .now), pauseTime: context.state.endTime)
             } compactTrailing: {
-                Text("CT")
+                Text(context.state.sessionName)
             } minimal: {
                 Text("M")
             }

@@ -5,13 +5,13 @@ import Foundation
 
 struct TimerCardView: View {
     @Binding var selectedTab: TabDetails
-    @Binding var secondsRemaining: Int
+    @Binding var lengthInMinutes: Int
     @State private var isTrackingTime: Bool = false
     @State private var endTime: Date? = nil
     @State private var activity: Activity<TimerAttributes>? = nil
     @State private var timer: Timer? = nil
     @State private var isPaused = false
-    
+    @StateObject var pomodoroTimer = PomodoroTimer()
   
     var body: some View {
         
@@ -19,7 +19,7 @@ struct TimerCardView: View {
             RoundedRectangle(cornerRadius: 16)
                 .fill(selectedTab.theme.mainColor)
             VStack {
-                Text("Countdown Timer: \(secondsRemaining) seconds")
+                Text("Countdown Timer: \(pomodoroTimer.secondsRemaining) seconds")
                     .padding()
                 
                 Circle()
@@ -41,7 +41,7 @@ struct TimerCardView: View {
                                 endTime = Date.now
                                 let attributes = TimerAttributes()
                                 guard let endTime else { return }
-                                let state = TimerAttributes.ContentState(endTime: endTime, secondsRemaining: secondsRemaining)
+                                let state = TimerAttributes.ContentState(endTime: endTime, secondsRemaining: pomodoroTimer.secondsRemaining, sessionName: selectedTab.name)
                                 let content = ActivityContent(state: state, staleDate: nil)
                                 activity = try? Activity.request(attributes: attributes, content: content, pushType: nil)
                                 
@@ -74,40 +74,23 @@ struct TimerCardView: View {
         }
     }
     private func stopTimer(){
-        guard let endTime else { return }
-        let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(secondsRemaining) + 1), secondsRemaining: secondsRemaining)
+        pomodoroTimer.stopCountdown()
+        let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(pomodoroTimer.secondsRemaining) + 1), secondsRemaining: pomodoroTimer.secondsRemaining, sessionName: selectedTab.name)
         Task {
             await activity?.end(ActivityContent(state: finalState, staleDate: .now), dismissalPolicy: ActivityUIDismissalPolicy.default)
         }
         self.endTime = nil
     }
     private func resetTimer(){
-        secondsRemaining = selectedTab.lengthInMinutes*60
-        isTrackingTime = false
-        let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(secondsRemaining) + 1), secondsRemaining: secondsRemaining)
-        Task {
-            await activity?.end(ActivityContent(state: finalState, staleDate: .now), dismissalPolicy: ActivityUIDismissalPolicy.default)
-        }
+        pomodoroTimer.reset(lengthInMinutes: lengthInMinutes)
     }
     private func startCountdown() {
-        // Invalidate the existing timer if any
-        timer?.invalidate()
-
-        // Create and start a new timer
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if isTrackingTime {
-                if secondsRemaining > 0 {
-                    secondsRemaining -= 1
-                } else {
-                    // Timer reached zero, perform additional actions if needed
-                    timer?.invalidate()
-                }
-            }
-        }
+        pomodoroTimer.reset(lengthInMinutes: lengthInMinutes)
+        pomodoroTimer.startCountdown()
     }
 }
 
 
 #Preview {
-    TimerCardView(selectedTab: .constant(TabDetails.defaultData[0]), secondsRemaining: .constant(20))
+    TimerCardView(selectedTab: .constant(TabDetails.defaultData[0]), lengthInMinutes: .constant(20))
 }
