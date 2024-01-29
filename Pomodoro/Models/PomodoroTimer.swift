@@ -11,11 +11,11 @@ import Foundation
 final class PomodoroTimer: ObservableObject {
     @Published var secondsElapsed = 0
     @Published var secondsRemaining = 0
-    
+    @Published var timerFired = false
     private(set) var lengthInMinutes: Int
     private var lengthInSeconds: Int { lengthInMinutes * 60 }
     
-    private var frequency: TimeInterval { 1.0 / 60.0 }
+    private var frequency: TimeInterval { 1.0 }
 
     private weak var timer: Timer?
     private var timerStopped = false
@@ -27,6 +27,9 @@ final class PomodoroTimer: ObservableObject {
     }
 
     func startCountdown() {
+        timerFired = true
+        timerStopped = false
+        startDate = Date()
         timer = Timer.scheduledTimer(withTimeInterval: frequency, repeats: true) { [weak self] timer in
             self?.update()
         }
@@ -35,7 +38,7 @@ final class PomodoroTimer: ObservableObject {
     
     func stopCountdown(){
         timer?.invalidate()
-        timerStopped = false
+        timerStopped = true
     }
     nonisolated private func update() {
 
@@ -43,11 +46,13 @@ final class PomodoroTimer: ObservableObject {
             guard let startDate,
                   !timerStopped else { return }
             let secondsElapsed = Int(Date().timeIntervalSince1970 - startDate.timeIntervalSince1970)
+            self.secondsElapsed = secondsElapsed
             secondsRemaining = max(lengthInSeconds - self.secondsElapsed, 0)
         }
     }
     
     func reset(lengthInMinutes: Int){
+        timerFired = false
         self.lengthInMinutes = lengthInMinutes
         secondsRemaining = lengthInSeconds
     }

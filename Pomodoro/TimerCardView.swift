@@ -10,17 +10,21 @@ struct TimerCardView: View {
     @State private var endTime: Date? = nil
     @State private var activity: Activity<TimerAttributes>? = nil
     @State private var timer: Timer? = nil
-    @State private var isPaused = false
     @StateObject var pomodoroTimer = PomodoroTimer()
-  
+    
     var body: some View {
         
         ZStack {
             RoundedRectangle(cornerRadius: 16)
                 .fill(selectedTab.theme.mainColor)
             VStack {
-                Text("Countdown Timer: \(pomodoroTimer.secondsRemaining) seconds")
-                    .padding()
+                if pomodoroTimer.timerFired == false {
+                    Text("\(formatTime(seconds: lengthInMinutes * 60))")
+                        .padding()
+                } else {
+                    Text("\(formatTime(seconds: pomodoroTimer.secondsRemaining))")
+                        .padding()
+                }
                 
                 Circle()
                     .strokeBorder(lineWidth: 24)
@@ -75,6 +79,8 @@ struct TimerCardView: View {
     }
     private func stopTimer(){
         pomodoroTimer.stopCountdown()
+        print("timerFired: \(pomodoroTimer.timerFired)")
+
         let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(pomodoroTimer.secondsRemaining) + 1), secondsRemaining: pomodoroTimer.secondsRemaining, sessionName: selectedTab.name)
         Task {
             await activity?.end(ActivityContent(state: finalState, staleDate: .now), dismissalPolicy: ActivityUIDismissalPolicy.default)
@@ -83,13 +89,22 @@ struct TimerCardView: View {
     }
     private func resetTimer(){
         pomodoroTimer.reset(lengthInMinutes: lengthInMinutes)
+        print("timerFired: \(pomodoroTimer.timerFired)")
+
     }
     private func startCountdown() {
-        pomodoroTimer.reset(lengthInMinutes: lengthInMinutes)
+        if pomodoroTimer.timerFired == false{
+            pomodoroTimer.reset(lengthInMinutes: lengthInMinutes)
+        }
         pomodoroTimer.startCountdown()
+        print("timerFired: \(pomodoroTimer.timerFired)")
+    }
+    func formatTime(seconds: Int) -> String {
+        let minutes = seconds / 60
+        let seconds = seconds % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }
-
 
 #Preview {
     TimerCardView(selectedTab: .constant(TabDetails.defaultData[0]), lengthInMinutes: .constant(20))
