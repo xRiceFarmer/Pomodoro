@@ -2,6 +2,7 @@
 import SwiftUI
 import ActivityKit
 import Foundation
+import UserNotifications
 
 struct TimerCardView: View {
     @Binding var selectedTab: TabDetails
@@ -10,8 +11,11 @@ struct TimerCardView: View {
     @State private var endTime: Date? = nil
     @State private var activity: Activity<TimerAttributes>? = nil
     @State private var timer: Timer? = nil
+    @StateObject var pomodoroTimer = PomodoroTimer()
+    
+    @State private var notificationDate: Date = Date()
 
-        @StateObject var pomodoroTimer = PomodoroTimer()
+    @State private var secondsElapsedCache = 0
     
     var body: some View {
         
@@ -77,6 +81,12 @@ struct TimerCardView: View {
             isTrackingTime = false
             stopTimer()
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
+            movingToBackground()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            movingToForeground()
+        }
     }
     private func stopTimer(){
         pomodoroTimer.stopCountdown()
@@ -104,6 +114,27 @@ struct TimerCardView: View {
         let minutes = seconds / 60
         let seconds = seconds % 60
         return String(format: "%02d:%02d", minutes, seconds)
+    }
+    func requestPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                print("All set!")
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    func movingToBackground() {
+        print("Moving to the background")
+        notificationDate = Date()
+        secondsElapsedCache = pomodoroTimer.secondsElapsed
+        pomodoroTimer.stopCountdown()
+    }
+    func movingToForeground() {
+        print("Moving to the foreground")
+        let deltaTime: Int = Int(Date().timeIntervalSince(notificationDate))
+        pomodoroTimer.secondsElapsed += deltaTime
+        pomodoroTimer.startCountdown()
     }
 }
 
