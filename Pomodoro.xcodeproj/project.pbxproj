@@ -10,6 +10,7 @@
 		0C2287462B5AD7C000951D4D /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9BDA3F2B5982A20031B6AF /* TimerAttributes.swift */; };
 		0C2287472B5AD7DB00951D4D /* TimerWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9BDA512B5AD3990031B6AF /* TimerWidget.swift */; };
 		0C2287642B5ECB3000951D4D /* DetailEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2287632B5ECB3000951D4D /* DetailEditView.swift */; };
+		0C69C0322B68EA9500A65950 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C69C0312B68EA9500A65950 /* ProgressBar.swift */; };
 		0C90816E2B5610D300B1AA9D /* PomodoroTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C90816D2B5610D300B1AA9D /* PomodoroTimer.swift */; };
 		0C9BDA402B5982A20031B6AF /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9BDA3F2B5982A20031B6AF /* TimerAttributes.swift */; };
 		0C9BDA4C2B5AD3990031B6AF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C9BDA2A2B597F070031B6AF /* WidgetKit.framework */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		0C2287632B5ECB3000951D4D /* DetailEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEditView.swift; sourceTree = "<group>"; };
+		0C69C0312B68EA9500A65950 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		0C90816D2B5610D300B1AA9D /* PomodoroTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimer.swift; sourceTree = "<group>"; };
 		0C9BDA2A2B597F070031B6AF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		0C9BDA2C2B597F070031B6AF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -152,6 +154,7 @@
 				0CD834AE2B54F56500FD2C3B /* TimerCardView.swift */,
 				0CD834A82B54F15700FD2C3B /* TabView.swift */,
 				0CE13EAE2B64956F0090FB5E /* ErrorView.swift */,
+				0C69C0312B68EA9500A65950 /* ProgressBar.swift */,
 				0CD834AA2B54F2F300FD2C3B /* CustomTabBar.swift */,
 				0CD834B02B54F5FF00FD2C3B /* Models */,
 				0CE13EA62B6388050090FB5E /* Assets.xcassets */,
@@ -303,6 +306,7 @@
 				0CE13EAF2B64956F0090FB5E /* ErrorView.swift in Sources */,
 				0CE13EA92B6388360090FB5E /* Theme.swift in Sources */,
 				0CAC838B2B62A74D00BE57E5 /* TabDetails.swift in Sources */,
+				0C69C0322B68EA9500A65950 /* ProgressBar.swift in Sources */,
 				0CE13EAB2B64915A0090FB5E /* TabStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

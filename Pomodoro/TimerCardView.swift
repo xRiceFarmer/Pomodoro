@@ -23,58 +23,64 @@ struct TimerCardView: View {
             RoundedRectangle(cornerRadius: 16)
                 .fill(selectedTab.theme.mainColor)
             VStack {
-                if pomodoroTimer.timerFired == false {
-                    Text("\(formatTime(seconds: lengthInMinutes * 60))")
-                        .padding()
-                } else {
-                    Text("\(formatTime(seconds: pomodoroTimer.secondsRemaining))")
-                        .padding()
-                }
-                
-                Circle()
-                    .strokeBorder(lineWidth: 24)
-                    .overlay {
-                        Button(action: {
-                            isTrackingTime.toggle()
-                            if isTrackingTime {
-                                startCountdown()
-                                
-                                // stop all running live activities
-                                for activity in Activity<TimerAttributes>.activities {
-                                    Task {
-                                        await activity.end(nil, dismissalPolicy: .immediate)
-                                    }
-                                }
-                                
-                                
-                                endTime = Date.now
-                                let attributes = TimerAttributes()
-                                guard let endTime else { return }
-                                let state = TimerAttributes.ContentState(endTime: endTime, secondsRemaining: pomodoroTimer.secondsRemaining, sessionName: selectedTab.name)
-                                let content = ActivityContent(state: state, staleDate: nil)
-                                activity = try? Activity.request(attributes: attributes, content: content, pushType: nil)
-                                
-                                
-                            } else {
-                                stopTimer()
-                            }
-                        }) {
-                            Image(systemName: isTrackingTime ? "stop.circle.fill" : "play.circle.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 100, height: 100)
-                                .foregroundColor(.white)
-                        }
-                        .padding()
+        
+                ZStack {
+                    if pomodoroTimer.timerFired == false {
+                        Text("\(formatTime(seconds: lengthInMinutes * 60))")
+                            .font(.system(size: 50))
+                            .foregroundStyle(selectedTab.theme.accentColor)
+                            .padding()
+                    } else {
+                        Text("\(formatTime(seconds: pomodoroTimer.secondsRemaining))")
+                            .foregroundStyle(selectedTab.theme.accentColor)
+                            .font(.system(size: 50))
+                            .padding()
                     }
-                Button(action:{
-                    resetTimer()
-                }){
-                    Text("Reset")
-                        .foregroundStyle(.white)
-                        .padding(.top)
+                    ProgressBar(lengthInMinutes: $lengthInMinutes, secondsElapsed: $pomodoroTimer.secondsElapsed)
+                        .padding()
                 }
-                .padding()
+            
+                HStack {
+                    Button(action: {
+                        isTrackingTime.toggle()
+                        if isTrackingTime {
+                            startCountdown()
+                            
+                            // stop all running live activities
+                            for activity in Activity<TimerAttributes>.activities {
+                                Task {
+                                    await activity.end(nil, dismissalPolicy: .immediate)
+                                }
+                            }
+                            
+                            
+                            endTime = Date.now
+                            let attributes = TimerAttributes()
+                            guard let endTime else { return }
+                            let state = TimerAttributes.ContentState(endTime: endTime, secondsRemaining: pomodoroTimer.secondsRemaining, sessionName: selectedTab.name)
+                            let content = ActivityContent(state: state, staleDate: nil)
+                            activity = try? Activity.request(attributes: attributes, content: content, pushType: nil)
+                            
+                            
+                        } else {
+                            stopTimer()
+                        }
+                    }) {
+                        Image(systemName: isTrackingTime ? "stop.circle.fill" : "play.circle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 50, height: 50)
+                            .foregroundColor(.white)
+                    }
+                    Button(action:{
+                        resetTimer()
+                    }){
+                        Text("Reset")
+                            .foregroundStyle(.white)
+                            .padding(.top)
+                    }
+                    .padding()
+                }
             }
         }
         .onDisappear(){
