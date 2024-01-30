@@ -10,7 +10,8 @@ struct TimerCardView: View {
     @State private var endTime: Date? = nil
     @State private var activity: Activity<TimerAttributes>? = nil
     @State private var timer: Timer? = nil
-    @StateObject var pomodoroTimer = PomodoroTimer()
+
+        @StateObject var pomodoroTimer = PomodoroTimer()
     
     var body: some View {
         

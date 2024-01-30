@@ -25,7 +25,6 @@
 		0CD834A92B54F15700FD2C3B /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD834A82B54F15700FD2C3B /* TabView.swift */; };
 		0CD834AB2B54F2F300FD2C3B /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD834AA2B54F2F300FD2C3B /* CustomTabBar.swift */; };
 		0CD834AF2B54F56500FD2C3B /* TimerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD834AE2B54F56500FD2C3B /* TimerCardView.swift */; };
-		0CD834B22B55028500FD2C3B /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD834B12B55028500FD2C3B /* Tabs.swift */; };
 		0CE13EA72B6388050090FB5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CE13EA62B6388050090FB5E /* Assets.xcassets */; };
 		0CE13EA92B6388360090FB5E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE13EA82B6388360090FB5E /* Theme.swift */; };
 		0CE13EAB2B64915A0090FB5E /* TabStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE13EAA2B64915A0090FB5E /* TabStore.swift */; };
@@ -76,7 +75,6 @@
 		0CD834A82B54F15700FD2C3B /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		0CD834AA2B54F2F300FD2C3B /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		0CD834AE2B54F56500FD2C3B /* TimerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCardView.swift; sourceTree = "<group>"; };
-		0CD834B12B55028500FD2C3B /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		0CE13EA62B6388050090FB5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../Scrumdinger/Scrumdinger/Assets.xcassets; sourceTree = "<group>"; };
 		0CE13EA82B6388360090FB5E /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		0CE13EAA2B64915A0090FB5E /* TabStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabStore.swift; sourceTree = "<group>"; };
@@ -174,7 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				0CE13EAC2B6494980090FB5E /* ErrorWrapper.swift */,
-				0CD834B12B55028500FD2C3B /* Tabs.swift */,
 				0CE13EA82B6388360090FB5E /* Theme.swift */,
 				0C90816D2B5610D300B1AA9D /* PomodoroTimer.swift */,
 				0CE13EAA2B64915A0090FB5E /* TabStore.swift */,
@@ -306,7 +303,6 @@
 				0CE13EAF2B64956F0090FB5E /* ErrorView.swift in Sources */,
 				0CE13EA92B6388360090FB5E /* Theme.swift in Sources */,
 				0CAC838B2B62A74D00BE57E5 /* TabDetails.swift in Sources */,
-				0CD834B22B55028500FD2C3B /* Tabs.swift in Sources */,
 				0CE13EAB2B64915A0090FB5E /* TabStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,6 +325,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D3K98Q8HR4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimerWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TimerWidget;
@@ -355,6 +352,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D3K98Q8HR4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimerWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TimerWidget;
@@ -426,7 +424,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -483,7 +481,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -502,6 +500,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Pomodoro/Preview Content\"";
+				DEVELOPMENT_TEAM = D3K98Q8HR4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
@@ -532,6 +531,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Pomodoro/Preview Content\"";
+				DEVELOPMENT_TEAM = D3K98Q8HR4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;

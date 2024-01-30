@@ -18,7 +18,7 @@ struct DetailEditView: View {
             ForEach(tabs.indices, id: \.self) {index in
                 Section(header: Text(tabs[index].name)){
                     HStack{
-                        Slider(value: $tabs[index].lengthInMinutesAsDoubles, in: 5...30, step: 1){
+                        Slider(value: $tabs[index].lengthInMinutesAsDoubles, in: 1...30, step: 1){
                             Text("Length")
                         }
                         .accessibilityValue("\(tabs[index].lengthInMinutes) minutes")

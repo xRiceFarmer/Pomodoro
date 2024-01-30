@@ -33,6 +33,8 @@ struct TimerWidgetView: View {
         Text.init(timerInterval:  Date.now...Date(timeInterval: Double(context.state.secondsRemaining), since: .now), pauseTime: context.state.endTime)
             .font(.headline)
             .padding()
+        Text(context.state.sessionName)
+
     }
 }
 

@@ -43,10 +43,7 @@ final class PomodoroTimer: ObservableObject {
     nonisolated private func update() {
 
         Task { @MainActor in
-            guard let startDate,
-                  !timerStopped else { return }
-            let secondsElapsed = Int(Date().timeIntervalSince1970 - startDate.timeIntervalSince1970)
-            self.secondsElapsed = secondsElapsed
+            secondsElapsed += 1
             secondsRemaining = max(lengthInSeconds - self.secondsElapsed, 0)
         }
     }
