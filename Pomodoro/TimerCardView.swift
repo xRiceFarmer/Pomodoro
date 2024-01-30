@@ -70,13 +70,13 @@ struct TimerCardView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 50, height: 50)
-                            .foregroundColor(.white)
+                            .foregroundStyle(selectedTab.theme.accentColor)
                     }
                     Button(action:{
                         resetTimer()
                     }){
                         Text("Reset")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(selectedTab.theme.accentColor)
                             .padding(.top)
                     }
                     .padding()
@@ -96,7 +96,7 @@ struct TimerCardView: View {
     }
     private func stopTimer(){
         pomodoroTimer.stopCountdown()
-        print("timerFired: \(pomodoroTimer.timerFired)")
+        //print("timerFired: \(pomodoroTimer.timerFired)")
 
         let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(pomodoroTimer.secondsRemaining) + 1), secondsRemaining: pomodoroTimer.secondsRemaining, sessionName: selectedTab.name)
         Task {
@@ -106,7 +106,7 @@ struct TimerCardView: View {
     }
     private func resetTimer(){
         pomodoroTimer.reset(lengthInMinutes: lengthInMinutes)
-        print("timerFired: \(pomodoroTimer.timerFired)")
+        //print("timerFired: \(pomodoroTimer.timerFired)")
 
     }
     private func startCountdown() {
@@ -114,21 +114,12 @@ struct TimerCardView: View {
             pomodoroTimer.reset(lengthInMinutes: lengthInMinutes)
         }
         pomodoroTimer.startCountdown()
-        print("timerFired: \(pomodoroTimer.timerFired)")
+        //print("timerFired: \(pomodoroTimer.timerFired)")
     }
     func formatTime(seconds: Int) -> String {
         let minutes = seconds / 60
         let seconds = seconds % 60
         return String(format: "%02d:%02d", minutes, seconds)
-    }
-    func requestPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-            if success {
-                print("All set!")
-            } else if let error = error {
-                print(error.localizedDescription)
-            }
-        }
     }
     func movingToBackground() {
         print("Moving to the background")
@@ -138,9 +129,11 @@ struct TimerCardView: View {
     }
     func movingToForeground() {
         print("Moving to the foreground")
-        let deltaTime: Int = Int(Date().timeIntervalSince(notificationDate))
-        pomodoroTimer.secondsElapsed += deltaTime
-        pomodoroTimer.startCountdown()
+        if isTrackingTime == true {
+            let deltaTime: Int = Int(Date().timeIntervalSince(notificationDate))
+            pomodoroTimer.secondsElapsed += deltaTime
+            pomodoroTimer.startCountdown()
+        }
     }
 }
 

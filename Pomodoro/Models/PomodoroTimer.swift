@@ -52,5 +52,6 @@ final class PomodoroTimer: ObservableObject {
         timerFired = false
         self.lengthInMinutes = lengthInMinutes
         secondsRemaining = lengthInSeconds
+        secondsElapsed = 0
     }
 }

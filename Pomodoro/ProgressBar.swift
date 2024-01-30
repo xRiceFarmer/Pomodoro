@@ -25,7 +25,7 @@ struct ProgressBar: View {
                 .stroke(style: StrokeStyle(lineWidth: 15.0, lineCap: .round, lineJoin: .round))
                 .foregroundStyle(color)
                 .rotationEffect(Angle(degrees: 270))
-                .animation(Animation.easeInOut(duration: 1.0), value: offset)
+                .animation(Animation.easeInOut(duration: 2.0), value: offset)
         }
     }
     func calculateProgress(lengthInMinutes: Int, secondsElapsed: Int) -> Float {

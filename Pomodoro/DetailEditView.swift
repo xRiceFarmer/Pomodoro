@@ -17,14 +17,17 @@ struct DetailEditView: View {
         Form {
             ForEach(tabs.indices, id: \.self) {index in
                 Section(header: Text(tabs[index].name)){
-                    HStack{
-                        Slider(value: $tabs[index].lengthInMinutesAsDoubles, in: 1...30, step: 1){
-                            Text("Length")
+                    VStack {
+                        HStack{
+                            Slider(value: $tabs[index].lengthInMinutesAsDoubles, in: 1...60, step: 1){
+                                Text("Length")
+                            }
+                            .accessibilityValue("\(tabs[index].lengthInMinutes) minutes")
+                            Spacer()
+                            Text("\(tabs[index].lengthInMinutes) minutes")
+                                .accessibilityHidden(true)
                         }
-                        .accessibilityValue("\(tabs[index].lengthInMinutes) minutes")
-                        Spacer()
-                        Text("\(tabs[index].lengthInMinutes) minutes")
-                            .accessibilityHidden(true)
+                        ThemePicker(selection: $tabs[index].theme)
                     }
                 }
             }
