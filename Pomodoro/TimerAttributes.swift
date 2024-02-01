@@ -8,5 +8,6 @@ struct TimerAttributes: ActivityAttributes{
         var endTime: Date
         var secondsRemaining: Int
         var sessionName: String
+        var theme: Theme
     }
 }

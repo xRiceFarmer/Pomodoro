@@ -2,34 +2,37 @@ import SwiftUI
 
 struct CustomTabBar: View {
     @Binding var selectedTabIndex: Int
-    @State var tabDetails: [TabDetails]
+    @Binding var tabDetails: [TabDetails]
 
     
     var body: some View {
         VStack {
             HStack {
                 ForEach(tabDetails.indices, id: \.self) { index in
-                    Spacer()
-                    Text(tabDetails[index].name)
-                        .font(.system(size: 16, weight: tabDetails[selectedTabIndex] == tabDetails[index] ? .bold : .regular)) // Use bold font when selected
-                        .foregroundColor(tabDetails[selectedTabIndex] == tabDetails[index] ? .blue : .black)
-                        .onTapGesture {
+                    Button(action: {
+                        withAnimation(.spring()){
                             selectedTabIndex = index
                         }
-                    Spacer()
+                    }){
+                        Text(tabDetails[index].name)
+                            .foregroundColor(tabDetails[selectedTabIndex] == tabDetails[index] ? tabDetails[selectedTabIndex].theme.accentColor : .gray)
+                            .frame(width: (UIScreen.main.bounds.width - 50) / 3)
+                            .padding(.vertical, 10)
+                            .font(.caption)
+                    }
+                    .background(tabDetails[selectedTabIndex] == tabDetails[index] ? tabDetails[selectedTabIndex].theme.mainColor :.clear)
+                    .clipShape(Capsule())
                 }
             }
-            .padding()
         }
-        .frame(height: 60)
         .background(.thinMaterial)
-        .cornerRadius(16)
-        .padding()
+        .clipShape(Capsule())
+        .padding(.top, 25)
     }
 }
 
 struct CustomTabBar_Previews: PreviewProvider {
     static var previews: some View {
-        CustomTabBar(selectedTabIndex: .constant(0), tabDetails: TabDetails.defaultData)
+        CustomTabBar(selectedTabIndex: .constant(0), tabDetails: .constant(TabDetails.defaultData))
     }
 }

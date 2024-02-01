@@ -32,7 +32,7 @@ struct TimerCardView: View {
                     Button(action:{
                         resetTimer()
                     }){
-                        Image(systemName: "arrow.counterclockwise")
+                        Image(systemName: "arrow.counterclockwise.circle.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .foregroundStyle(selectedTab.theme.accentColor)
@@ -45,12 +45,12 @@ struct TimerCardView: View {
                         Text("\(formatTime(seconds: lengthInMinutes * 60))")
                             .font(.system(size: 50))
                             .foregroundStyle(selectedTab.theme.accentColor)
-                            .padding()
+                            .padding(.top)
                     } else {
                         Text("\(formatTime(seconds: pomodoroTimer.secondsRemaining))")
                             .foregroundStyle(selectedTab.theme.accentColor)
                             .font(.system(size: 50))
-                            .padding()
+                            .padding(.top)
                     }
                     ProgressBar(lengthInMinutes: $selectedTab.lengthInMinutes, secondsElapsed: $pomodoroTimer.secondsElapsed)
                         .padding()
@@ -75,9 +75,10 @@ struct TimerCardView: View {
                             endTime = Date.now
                             let attributes = TimerAttributes()
                             guard let endTime else { return }
-                            let state = TimerAttributes.ContentState(endTime: endTime, secondsRemaining: pomodoroTimer.secondsRemaining, sessionName: selectedTab.name)
+                            let state = TimerAttributes.ContentState(endTime: endTime, secondsRemaining: pomodoroTimer.secondsRemaining, sessionName: selectedTab.name, theme: selectedTab.theme)
                             let content = ActivityContent(state: state, staleDate: nil)
                             activity = try? Activity.request(attributes: attributes, content: content, pushType: nil)
+                                
                             
                             
                         } else {
@@ -107,7 +108,9 @@ struct TimerCardView: View {
         }
         .onChange(of: pomodoroTimer.secondsRemaining){
             if pomodoroTimer.secondsRemaining == 0 && pomodoroTimer.timerFired == true{
-                resetTimer()
+                //resetTimer()
+                stopTimer()
+                isTrackingTime = false
             }
         }
     }
@@ -115,7 +118,7 @@ struct TimerCardView: View {
         pomodoroTimer.stopCountdown()
         //print("timerFired: \(pomodoroTimer.timerFired)")
 
-        let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(pomodoroTimer.secondsRemaining) + 1), secondsRemaining: pomodoroTimer.secondsRemaining, sessionName: selectedTab.name)
+        let finalState = TimerAttributes.ContentState(endTime: Date().addingTimeInterval(Double(pomodoroTimer.secondsRemaining) + 1), secondsRemaining: pomodoroTimer.secondsRemaining, sessionName: selectedTab.name, theme: selectedTab.theme)
         Task {
             await activity?.end(ActivityContent(state: finalState, staleDate: .now), dismissalPolicy: ActivityUIDismissalPolicy.default)
         }
@@ -165,7 +168,7 @@ struct TimerCardView: View {
             endTime = Date.now
             let attributes = TimerAttributes()
             guard let endTime else { return }
-            let state = TimerAttributes.ContentState(endTime: endTime, secondsRemaining: tempSecondsRemaining, sessionName: selectedTab.name)
+            let state = TimerAttributes.ContentState(endTime: endTime, secondsRemaining: tempSecondsRemaining, sessionName: selectedTab.name, theme: selectedTab.theme)
             let content = ActivityContent(state: state, staleDate: nil)
             activity = try? Activity.request(attributes: attributes, content: content, pushType: nil)
         }

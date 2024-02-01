@@ -39,7 +39,7 @@ struct ContentView: View {
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
                 .frame(maxHeight: .infinity)
             }
-            CustomTabBar(selectedTabIndex: $selectedTabIndex, tabDetails: tabs)
+            CustomTabBar(selectedTabIndex: $selectedTabIndex, tabDetails: $tabs)
             .navigationTitle("Pomodoro Timer")
             .toolbar{
                 //Button(action:{}){Image(systemName: "plus")}
