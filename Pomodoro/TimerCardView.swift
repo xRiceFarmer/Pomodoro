@@ -149,9 +149,25 @@ struct TimerCardView: View {
     func movingToForeground() {
         print("Moving to the foreground")
         if isTrackingTime == true {
+            //end all live activities
+            for activity in Activity<TimerAttributes>.activities {
+                Task {
+                    await activity.end(nil, dismissalPolicy: .immediate)
+                }
+            }
+            
             let deltaTime: Int = Int(Date().timeIntervalSince(notificationDate))
             pomodoroTimer.secondsElapsed += deltaTime
+            let tempSecondsRemaining = max(lengthInMinutes * 60 - pomodoroTimer.secondsElapsed, 0)
             pomodoroTimer.startCountdown()
+            
+                //sync live activity with restarted timer
+            endTime = Date.now
+            let attributes = TimerAttributes()
+            guard let endTime else { return }
+            let state = TimerAttributes.ContentState(endTime: endTime, secondsRemaining: tempSecondsRemaining, sessionName: selectedTab.name)
+            let content = ActivityContent(state: state, staleDate: nil)
+            activity = try? Activity.request(attributes: attributes, content: content, pushType: nil)
         }
     }
        
