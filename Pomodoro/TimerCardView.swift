@@ -5,13 +5,15 @@ import Foundation
 import UserNotifications
 
 struct TimerCardView: View {
+    @Binding var tabs : [TabDetails]
+
     @Binding var selectedTab: TabDetails
     @Binding var lengthInMinutes: Int
     @State private var isTrackingTime: Bool = false
     @State private var endTime: Date? = nil
     @State private var activity: Activity<TimerAttributes>? = nil
     @State private var timer: Timer? = nil
-    @StateObject var pomodoroTimer = PomodoroTimer()
+    @StateObject var pomodoroTimer : PomodoroTimer
     
     @State private var notificationDate: Date = Date()
 
@@ -23,7 +25,19 @@ struct TimerCardView: View {
             RoundedRectangle(cornerRadius: 16)
                 .fill(selectedTab.theme.mainColor)
             VStack {
-        
+                HStack{
+                    Spacer()
+                    Button(action:{
+                        resetTimer()
+                    }){
+                        Image(systemName: "arrow.counterclockwise")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundStyle(selectedTab.theme.accentColor)
+                            .frame(width: 20, height: 20, alignment: .leading)
+                    }
+                    .padding(.trailing, 20)
+                }
                 ZStack {
                     if pomodoroTimer.timerFired == false {
                         Text("\(formatTime(seconds: lengthInMinutes * 60))")
@@ -36,11 +50,10 @@ struct TimerCardView: View {
                             .font(.system(size: 50))
                             .padding()
                     }
-                    ProgressBar(lengthInMinutes: $lengthInMinutes, secondsElapsed: $pomodoroTimer.secondsElapsed)
+                    ProgressBar(lengthInMinutes: $selectedTab.lengthInMinutes, secondsElapsed: $pomodoroTimer.secondsElapsed)
                         .padding()
                 }
-            
-                HStack {
+                VStack {
                     Button(action: {
                         isTrackingTime.toggle()
                         if isTrackingTime {
@@ -72,14 +85,6 @@ struct TimerCardView: View {
                             .frame(width: 50, height: 50)
                             .foregroundStyle(selectedTab.theme.accentColor)
                     }
-                    Button(action:{
-                        resetTimer()
-                    }){
-                        Text("Reset")
-                            .foregroundStyle(selectedTab.theme.accentColor)
-                            .padding(.top)
-                    }
-                    .padding()
                 }
             }
         }
@@ -93,6 +98,14 @@ struct TimerCardView: View {
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             movingToForeground()
         }
+        .onChange(of: pomodoroTimer.shouldResetTimer){
+            if pomodoroTimer.shouldResetTimer == true {
+                resetTimer()
+                pomodoroTimer.shouldResetTimer = false
+            }
+            
+            
+        }
     }
     private func stopTimer(){
         pomodoroTimer.stopCountdown()
@@ -104,8 +117,10 @@ struct TimerCardView: View {
         }
         self.endTime = nil
     }
-    private func resetTimer(){
+    func resetTimer(){
         pomodoroTimer.reset(lengthInMinutes: lengthInMinutes)
+        stopTimer()
+        isTrackingTime = false
         //print("timerFired: \(pomodoroTimer.timerFired)")
 
     }
@@ -135,8 +150,9 @@ struct TimerCardView: View {
             pomodoroTimer.startCountdown()
         }
     }
+       
 }
 
 #Preview {
-    TimerCardView(selectedTab: .constant(TabDetails.defaultData[0]), lengthInMinutes: .constant(20))
+    TimerCardView(tabs: .constant(TabDetails.defaultData), selectedTab: .constant(TabDetails.defaultData[0]), lengthInMinutes: .constant(20), pomodoroTimer: PomodoroTimer())
 }

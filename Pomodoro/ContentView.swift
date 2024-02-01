@@ -7,17 +7,29 @@ struct ContentView: View {
     @Binding var tabs : [TabDetails]
     @State var selectedTabIndex : Int = 0
     
+    @StateObject var pomodoroSessionTimer = PomodoroTimer()
+    @StateObject var shortBreakSessionTimer = PomodoroTimer()
+    @StateObject var longBreakSessionTimer = PomodoroTimer()
+
+    
+
+    
     @Environment(\.scenePhase) private var scenePhase
     let saveAction: ()->Void
     var body: some View {
         NavigationStack {
             VStack{
                 TabView(selection: $selectedTabIndex){
-                    ForEach(tabs.indices, id: \.self)  {index in
-                        TimerCardView(selectedTab: $tabs[index], lengthInMinutes: $tabs[index].lengthInMinutes)
-                            .tag(index)
-                            .padding()
-                    }
+                    TimerCardView(tabs: $tabs, selectedTab: $tabs[0], lengthInMinutes: $tabs[0].lengthInMinutes, pomodoroTimer: pomodoroSessionTimer)
+                        .tag(0)
+                        .padding()
+                    TimerCardView(tabs: $tabs, selectedTab: $tabs[1], lengthInMinutes: $tabs[1].lengthInMinutes, pomodoroTimer: shortBreakSessionTimer)
+                        .tag(1)
+                        .padding()
+                    TimerCardView(tabs: $tabs, selectedTab: $tabs[2], lengthInMinutes: $tabs[2].lengthInMinutes, pomodoroTimer: longBreakSessionTimer)
+                        .tag(2)
+                        .padding()
+                        
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
@@ -44,8 +56,12 @@ struct ContentView: View {
                             }
                             ToolbarItem(placement: .confirmationAction){
                                 Button("Done"){
+                                    pomodoroSessionTimer.shouldResetTimer = true
+                                    shortBreakSessionTimer.shouldResetTimer = true
+                                    longBreakSessionTimer.shouldResetTimer = true
                                     isPresentingEditView = false
                                     tabs = editingTab
+                                    
                                 }
                             }
                         }

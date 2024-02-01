@@ -9,6 +9,7 @@ import Foundation
 
 @MainActor
 final class PomodoroTimer: ObservableObject {
+    @Published var shouldResetTimer = false
     @Published var secondsElapsed = 0
     @Published var secondsRemaining = 0
     @Published var timerFired = false

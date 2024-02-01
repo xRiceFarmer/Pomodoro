@@ -10,6 +10,7 @@ import SwiftUI
 struct ProgressBar: View {
     @Binding var lengthInMinutes: Int
     @Binding var secondsElapsed: Int
+    
 
     
     @State private var offset: CGFloat = 200.0

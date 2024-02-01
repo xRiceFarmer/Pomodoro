@@ -15,20 +15,46 @@ struct DetailEditView: View {
 
     var body: some View {
         Form {
-            ForEach(tabs.indices, id: \.self) {index in
-                Section(header: Text(tabs[index].name)){
-                    VStack {
-                        HStack{
-                            Slider(value: $tabs[index].lengthInMinutesAsDoubles, in: 1...60, step: 1){
-                                Text("Length")
-                            }
-                            .accessibilityValue("\(tabs[index].lengthInMinutes) minutes")
-                            Spacer()
-                            Text("\(tabs[index].lengthInMinutes) minutes")
-                                .accessibilityHidden(true)
+            Section(header: Text(tabs[0].name)){
+                VStack {
+                    HStack{
+                        Slider(value: $tabs[0].lengthInMinutesAsDoubles, in: 1...60, step: 1){
+                            Text("Length")
                         }
-                        ThemePicker(selection: $tabs[index].theme)
+                        .accessibilityValue("\(tabs[0].lengthInMinutes) minutes")
+                        Spacer()
+                        Text("\(tabs[0].lengthInMinutes) minutes")
+                            .accessibilityHidden(true)
                     }
+                    ThemePicker(selection: $tabs[0].theme)
+                }
+            }
+            Section(header: Text(tabs[1].name)){
+                VStack {
+                    HStack{
+                        Slider(value: $tabs[1].lengthInMinutesAsDoubles, in: 1...60, step: 1){
+                            Text("Length")
+                        }
+                        .accessibilityValue("\(tabs[1].lengthInMinutes) minutes")
+                        Spacer()
+                        Text("\(tabs[1].lengthInMinutes) minutes")
+                            .accessibilityHidden(true)
+                    }
+                    ThemePicker(selection: $tabs[1].theme)
+                }
+            }
+            Section(header: Text(tabs[2].name)){
+                VStack {
+                    HStack{
+                        Slider(value: $tabs[2].lengthInMinutesAsDoubles, in: 1...60, step: 1){
+                            Text("Length")
+                        }
+                        .accessibilityValue("\(tabs[2].lengthInMinutes) minutes")
+                        Spacer()
+                        Text("\(tabs[2].lengthInMinutes) minutes")
+                            .accessibilityHidden(true)
+                    }
+                    ThemePicker(selection: $tabs[2].theme)
                 }
             }
         }

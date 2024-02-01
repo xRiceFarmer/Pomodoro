@@ -34,6 +34,7 @@ struct TimerWidgetView: View {
             .font(.headline)
             .padding()
         Text(context.state.sessionName)
+            .padding()
 
     }
 }
