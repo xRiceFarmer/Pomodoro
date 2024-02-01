@@ -11,7 +11,11 @@ struct ContentView: View {
     @StateObject var shortBreakSessionTimer = PomodoroTimer()
     @StateObject var longBreakSessionTimer = PomodoroTimer()
 
-    
+    @State var newPomodoroTimerStarted = false
+    @State var newShortBreakTimerStarted = false
+    @State var newLongBreakTimerStarted = false
+
+
 
     
     @Environment(\.scenePhase) private var scenePhase
@@ -20,13 +24,13 @@ struct ContentView: View {
         NavigationStack {
             VStack{
                 TabView(selection: $selectedTabIndex){
-                    TimerCardView(tabs: $tabs, selectedTab: $tabs[0], lengthInMinutes: $tabs[0].lengthInMinutes, pomodoroTimer: pomodoroSessionTimer)
+                    TimerCardView(tabs: $tabs, selectedTab: $tabs[0], lengthInMinutes: $tabs[0].lengthInMinutes, pomodoroTimer: pomodoroSessionTimer, newTimerStarted: $newPomodoroTimerStarted)
                         .tag(0)
                         .padding()
-                    TimerCardView(tabs: $tabs, selectedTab: $tabs[1], lengthInMinutes: $tabs[1].lengthInMinutes, pomodoroTimer: shortBreakSessionTimer)
+                    TimerCardView(tabs: $tabs, selectedTab: $tabs[1], lengthInMinutes: $tabs[1].lengthInMinutes, pomodoroTimer: shortBreakSessionTimer, newTimerStarted: $newShortBreakTimerStarted)
                         .tag(1)
                         .padding()
-                    TimerCardView(tabs: $tabs, selectedTab: $tabs[2], lengthInMinutes: $tabs[2].lengthInMinutes, pomodoroTimer: longBreakSessionTimer)
+                    TimerCardView(tabs: $tabs, selectedTab: $tabs[2], lengthInMinutes: $tabs[2].lengthInMinutes, pomodoroTimer: longBreakSessionTimer, newTimerStarted: $newLongBreakTimerStarted)
                         .tag(2)
                         .padding()
                         
@@ -65,6 +69,27 @@ struct ContentView: View {
                                 }
                             }
                         }
+                }
+            }
+            .onChange(of: newPomodoroTimerStarted){
+                if newPomodoroTimerStarted == true {
+                    shortBreakSessionTimer.shouldResetTimer = true
+                    longBreakSessionTimer.shouldResetTimer = true
+                    newPomodoroTimerStarted = false
+                }
+            }
+            .onChange(of: newShortBreakTimerStarted){
+                if newShortBreakTimerStarted == true {
+                    pomodoroSessionTimer.shouldResetTimer = true
+                    longBreakSessionTimer.shouldResetTimer = true
+                    newShortBreakTimerStarted = false
+                }
+            }
+            .onChange(of: newLongBreakTimerStarted){
+                if newLongBreakTimerStarted == true {
+                    pomodoroSessionTimer.shouldResetTimer = true
+                    shortBreakSessionTimer.shouldResetTimer = true
+                    newLongBreakTimerStarted = false
                 }
             }
         }

@@ -16,8 +16,10 @@ struct TimerCardView: View {
     @StateObject var pomodoroTimer : PomodoroTimer
     
     @State private var notificationDate: Date = Date()
+    
+    @Binding var newTimerStarted : Bool
 
-    @State private var secondsElapsedCache = 0
+    //@State private var secondsElapsedCache = 0
     
     var body: some View {
         
@@ -56,6 +58,9 @@ struct TimerCardView: View {
                 VStack {
                     Button(action: {
                         isTrackingTime.toggle()
+                        if pomodoroTimer.timerFired == false {
+                            newTimerStarted = true
+                        }
                         if isTrackingTime {
                             startCountdown()
                             
@@ -87,10 +92,6 @@ struct TimerCardView: View {
                     }
                 }
             }
-        }
-        .onDisappear(){
-            isTrackingTime = false
-            stopTimer()
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
             movingToBackground()
@@ -139,7 +140,7 @@ struct TimerCardView: View {
     func movingToBackground() {
         print("Moving to the background")
         notificationDate = Date()
-        secondsElapsedCache = pomodoroTimer.secondsElapsed
+        //secondsElapsedCache = pomodoroTimer.secondsElapsed
         pomodoroTimer.stopCountdown()
     }
     func movingToForeground() {
@@ -154,5 +155,5 @@ struct TimerCardView: View {
 }
 
 #Preview {
-    TimerCardView(tabs: .constant(TabDetails.defaultData), selectedTab: .constant(TabDetails.defaultData[0]), lengthInMinutes: .constant(20), pomodoroTimer: PomodoroTimer())
+    TimerCardView(tabs: .constant(TabDetails.defaultData), selectedTab: .constant(TabDetails.defaultData[0]), lengthInMinutes: .constant(20), pomodoroTimer: PomodoroTimer(), newTimerStarted: .constant(false))
 }
