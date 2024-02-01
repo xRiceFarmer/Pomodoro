@@ -104,8 +104,11 @@ struct TimerCardView: View {
                 resetTimer()
                 pomodoroTimer.shouldResetTimer = false
             }
-            
-            
+        }
+        .onChange(of: pomodoroTimer.secondsRemaining){
+            if pomodoroTimer.secondsRemaining == 0 && pomodoroTimer.timerFired == true{
+                resetTimer()
+            }
         }
     }
     private func stopTimer(){
