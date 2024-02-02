@@ -62,7 +62,7 @@ struct TimerCardView: View {
                             newTimerStarted = true
                         }
                         if isTrackingTime {
-                            if pomodoroTimer.secondsRemaining == 0{
+                            if pomodoroTimer.secondsRemaining == 0 && pomodoroTimer.timerFired == true {
                                 resetTimer()
                                 isTrackingTime = true
                             }
