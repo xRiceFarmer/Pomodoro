@@ -23,7 +23,7 @@ struct DetailEditView: View {
                         }
                         .accessibilityValue("\(tabs[0].lengthInMinutes) minutes")
                         Spacer()
-                        Text("\(tabs[0].lengthInMinutes) minutes")
+                        Text("\(tabs[0].lengthInMinutes) \(tabs[0].lengthInMinutes == 1 ? "minute" : "minutes")")
                             .accessibilityHidden(true)
                     }
                     ThemePicker(selection: $tabs[0].theme)
@@ -37,7 +37,7 @@ struct DetailEditView: View {
                         }
                         .accessibilityValue("\(tabs[1].lengthInMinutes) minutes")
                         Spacer()
-                        Text("\(tabs[1].lengthInMinutes) minutes")
+                        Text("\(tabs[1].lengthInMinutes) \(tabs[1].lengthInMinutes == 1 ? "minute" : "minutes")")
                             .accessibilityHidden(true)
                     }
                     ThemePicker(selection: $tabs[1].theme)
@@ -51,7 +51,7 @@ struct DetailEditView: View {
                         }
                         .accessibilityValue("\(tabs[2].lengthInMinutes) minutes")
                         Spacer()
-                        Text("\(tabs[2].lengthInMinutes) minutes")
+                        Text("\(tabs[2].lengthInMinutes) \(tabs[2].lengthInMinutes == 1 ? "minute" : "minutes")")
                             .accessibilityHidden(true)
                     }
                     ThemePicker(selection: $tabs[2].theme)

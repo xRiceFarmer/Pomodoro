@@ -35,7 +35,7 @@ struct TimerWidget: Widget {
                             }
                         )
                         .progressViewStyle(.circular)
-                        .tint(.pink)
+                        .tint(.green)
                         .frame(maxWidth: .minimum(50, 50), alignment: .trailing)
                     }
                     
@@ -72,7 +72,7 @@ struct TimerWidget: Widget {
                     }
                 )
                 .progressViewStyle(.circular)
-                .tint(.pink)
+                .tint(.green)
                 .frame(maxWidth: .minimum(50, 50), alignment: .trailing)
             } compactTrailing: {
                 Text.init(timerInterval:  Date.now...Date(timeInterval: Double(context.state.secondsRemaining), since: .now), pauseTime: context.state.endTime)

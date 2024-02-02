@@ -63,8 +63,7 @@ struct TimerCardView: View {
                         }
                         if isTrackingTime {
                             if pomodoroTimer.secondsRemaining == 0 && pomodoroTimer.timerFired == true {
-                                resetTimer()
-                                isTrackingTime = true
+                                pomodoroTimer.reset(lengthInMinutes: lengthInMinutes)
                             }
                             startCountdown()
                             
@@ -76,7 +75,7 @@ struct TimerCardView: View {
                         Image(systemName: isTrackingTime ? "stop.circle.fill" : "play.circle.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50)
+                            .frame(width: 50, height: 50, alignment: .bottom)
                             .foregroundStyle(selectedTab.theme.accentColor)
                     }
                 }
