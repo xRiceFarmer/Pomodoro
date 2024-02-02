@@ -7,10 +7,12 @@ struct TimerWidget: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: TimerAttributes.self) { context in
             TimerWidgetView(context: context)
-                .activityBackgroundTint(Color.white.opacity(0.25))
-
         } dynamicIsland: { context in
             DynamicIsland {
+                /**DynamicIslandExpandedRegion(.center){
+                    Image("pomodoroIcon")
+                        .frame(maxWidth: .minimum(70, 70), alignment: .leading)
+                 }**/
                 DynamicIslandExpandedRegion(.leading){
                     VStack{
                         ProgressView(
@@ -41,13 +43,15 @@ struct TimerWidget: Widget {
                     
                 }
                 DynamicIslandExpandedRegion(.trailing){
-                    VStack{
+                    VStack(alignment: .center){
                         
                         Text.init(timerInterval:  Date.now...Date(timeInterval: Double(context.state.secondsRemaining), since: .now), pauseTime: context.state.endTime)
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .minimum(50, 50), alignment: .center)
+                            .font(.system(size: 18, weight: .bold, design: .default))
+                            .frame(maxWidth: .minimum(60, 60), alignment: .center)
+                            .padding(.trailing)
+                        Image("pomodoroIcon")
+                            .frame(maxWidth: .minimum(20, 20), alignment: .trailing)
                     }
-                       
                 }
             } compactLeading: {
                 ProgressView(
@@ -87,16 +91,24 @@ struct TimerWidget: Widget {
 struct TimerWidgetView: View {
     let context: ActivityViewContext<TimerAttributes>
     var body: some View {
-            HStack{
+        HStack(alignment: .center){
+                Image("pomodoroIcon")
+                    .frame(maxWidth: .minimum(50, 50), alignment: .center)
+                    .padding(.leading)
                 Text(context.state.sessionName)
-                    .frame(alignment: .leading)
-                    .padding()
+                .font(.system(size: 18, weight: .bold, design: .default))
+                .foregroundStyle(.gray)
+
+            VStack{
                 Text.init(timerInterval:  Date.now...Date(timeInterval: Double(context.state.secondsRemaining), since: .now), pauseTime: context.state.endTime)
-                    .font(.headline)
-                    .frame(alignment: .trailing)
-                    .padding()
-                
+                .font(.system(size: 30, weight: .bold, design: .default))
+                .padding(.horizontal, 40)
+                //.frame(maxWidth: .infinity, alignment: .center)
+                .multilineTextAlignment(.trailing)
             }
+            .frame(alignment: .trailing)
+            Spacer()
+        }
     }
 }
 

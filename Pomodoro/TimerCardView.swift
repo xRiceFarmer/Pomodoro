@@ -46,16 +46,18 @@ struct TimerCardView: View {
                             .font(.system(size: 50))
                             .foregroundStyle(selectedTab.theme.accentColor)
                             .padding(.top)
+                            .multilineTextAlignment(.leading)
                     } else {
                         Text("\(formatTime(seconds: pomodoroTimer.secondsRemaining))")
                             .foregroundStyle(selectedTab.theme.accentColor)
                             .font(.system(size: 50))
                             .padding(.top)
+                            .multilineTextAlignment(.leading)
                     }
                     ProgressBar(lengthInMinutes: $selectedTab.lengthInMinutes, secondsElapsed: $pomodoroTimer.secondsElapsed)
                         .padding()
                 }
-                VStack {
+                VStack(alignment: .leading) {
                     Button(action: {
                         isTrackingTime.toggle()
                         if pomodoroTimer.timerFired == false {
@@ -78,6 +80,7 @@ struct TimerCardView: View {
                             .frame(width: 50, height: 50, alignment: .bottom)
                             .foregroundStyle(selectedTab.theme.accentColor)
                     }
+                    .frame(alignment: .bottom)
                 }
             }
         }
