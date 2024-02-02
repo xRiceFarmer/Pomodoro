@@ -62,23 +62,11 @@ struct TimerCardView: View {
                             newTimerStarted = true
                         }
                         if isTrackingTime {
-                            startCountdown()
-                            
-                            // stop all running live activities
-                            for activity in Activity<TimerAttributes>.activities {
-                                Task {
-                                    await activity.end(nil, dismissalPolicy: .immediate)
-                                }
+                            if pomodoroTimer.secondsRemaining == 0{
+                                resetTimer()
+                                isTrackingTime = true
                             }
-                            
-                            
-                            endTime = Date.now
-                            let attributes = TimerAttributes()
-                            guard let endTime else { return }
-                            let state = TimerAttributes.ContentState(endTime: endTime, secondsRemaining: pomodoroTimer.secondsRemaining, sessionName: selectedTab.name, theme: selectedTab.theme)
-                            let content = ActivityContent(state: state, staleDate: nil)
-                            activity = try? Activity.request(attributes: attributes, content: content, pushType: nil)
-                                
+                            startCountdown()
                             
                             
                         } else {
@@ -136,6 +124,23 @@ struct TimerCardView: View {
             pomodoroTimer.reset(lengthInMinutes: lengthInMinutes)
         }
         pomodoroTimer.startCountdown()
+        // stop all running live activities
+        for activity in Activity<TimerAttributes>.activities {
+            Task {
+                await activity.end(nil, dismissalPolicy: .immediate)
+            }
+        }
+        
+        
+        endTime = Date.now
+        let attributes = TimerAttributes()
+        guard let endTime else { return }
+        let state = TimerAttributes.ContentState(endTime: endTime, secondsRemaining: pomodoroTimer.secondsRemaining, sessionName: selectedTab.name, theme: selectedTab.theme)
+        let content = ActivityContent(state: state, staleDate: nil)
+        activity = try? Activity.request(attributes: attributes, content: content, pushType: nil)
+            
+        
+        
         //print("timerFired: \(pomodoroTimer.timerFired)")
     }
     func formatTime(seconds: Int) -> String {

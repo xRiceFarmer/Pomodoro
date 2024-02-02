@@ -20,9 +20,15 @@ struct TimerWidget: Widget {
             } compactTrailing: {
                 Text(context.state.sessionName)
             } minimal: {
-                Text("M")
+                ProgressView(
+                    timerInterval: Date.now...Date(timeInterval: Double(context.state.secondsRemaining), since: .now),
+                    countsDown: true
+                    //label: { EmptyView() },
+                    //currentValueLabel: { EmptyView() }
+                )
+                .progressViewStyle(.circular)
+                .tint(.pink)
             }
-
         }
     }
 }
@@ -30,11 +36,25 @@ struct TimerWidget: Widget {
 struct TimerWidgetView: View {
     let context: ActivityViewContext<TimerAttributes>
     var body: some View {
-        Text.init(timerInterval:  Date.now...Date(timeInterval: Double(context.state.secondsRemaining), since: .now), pauseTime: context.state.endTime)
-            .font(.headline)
-            .padding()
-        Text(context.state.sessionName)
-            .padding()
+        VStack{
+            HStack{
+                Text.init(timerInterval:  Date.now...Date(timeInterval: Double(context.state.secondsRemaining), since: .now), pauseTime: context.state.endTime)
+                    .font(.headline)
+                    .padding()
+                Text(context.state.sessionName)
+                    .padding()
+            }
+            ProgressView(
+                timerInterval: Date.now...Date(timeInterval: Double(context.state.secondsRemaining), since: .now),
+                countsDown: true
+                //label: { EmptyView() },
+                //currentValueLabel: { EmptyView() }
+            )
+            .progressViewStyle(.automatic)
+            .tint(.pink)
+        }
+        
+        
 
     }
 }
