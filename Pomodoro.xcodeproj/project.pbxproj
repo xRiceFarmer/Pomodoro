@@ -27,7 +27,6 @@
 		0CD8349B2B54E4B400FD2C3B /* PomodoroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD8349A2B54E4B400FD2C3B /* PomodoroApp.swift */; };
 		0CD8349D2B54E4B400FD2C3B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD8349C2B54E4B400FD2C3B /* ContentView.swift */; };
 		0CD834A22B54E4B500FD2C3B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CD834A12B54E4B500FD2C3B /* Preview Assets.xcassets */; };
-		0CD834A92B54F15700FD2C3B /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD834A82B54F15700FD2C3B /* TabView.swift */; };
 		0CD834AB2B54F2F300FD2C3B /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD834AA2B54F2F300FD2C3B /* CustomTabBar.swift */; };
 		0CD834AF2B54F56500FD2C3B /* TimerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD834AE2B54F56500FD2C3B /* TimerCardView.swift */; };
 		0CE13EA72B6388050090FB5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CE13EA62B6388050090FB5E /* Assets.xcassets */; };
@@ -80,7 +79,6 @@
 		0CD8349A2B54E4B400FD2C3B /* PomodoroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroApp.swift; sourceTree = "<group>"; };
 		0CD8349C2B54E4B400FD2C3B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0CD834A12B54E4B500FD2C3B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		0CD834A82B54F15700FD2C3B /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		0CD834AA2B54F2F300FD2C3B /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		0CD834AE2B54F56500FD2C3B /* TimerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCardView.swift; sourceTree = "<group>"; };
 		0CE13EA62B6388050090FB5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../Scrumdinger/Scrumdinger/Assets.xcassets; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 				0C9BDA3F2B5982A20031B6AF /* TimerAttributes.swift */,
 				0C2287632B5ECB3000951D4D /* DetailEditView.swift */,
 				0CD834AE2B54F56500FD2C3B /* TimerCardView.swift */,
-				0CD834A82B54F15700FD2C3B /* TabView.swift */,
 				0CE13EAE2B64956F0090FB5E /* ErrorView.swift */,
 				0C69C0312B68EA9500A65950 /* ProgressBar.swift */,
 				0C69C0332B68FC1400A65950 /* ThemePicker.swift */,
@@ -307,7 +304,6 @@
 				0CD834AB2B54F2F300FD2C3B /* CustomTabBar.swift in Sources */,
 				0CD8349D2B54E4B400FD2C3B /* ContentView.swift in Sources */,
 				0C90816E2B5610D300B1AA9D /* PomodoroTimer.swift in Sources */,
-				0CD834A92B54F15700FD2C3B /* TabView.swift in Sources */,
 				0CD834AF2B54F56500FD2C3B /* TimerCardView.swift in Sources */,
 				0C2287642B5ECB3000951D4D /* DetailEditView.swift in Sources */,
 				0CE13EAD2B6494980090FB5E /* ErrorWrapper.swift in Sources */,

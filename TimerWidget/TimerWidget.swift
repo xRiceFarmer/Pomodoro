@@ -99,11 +99,11 @@ struct TimerWidgetView: View {
                 .font(.system(size: 18, weight: .bold, design: .default))
                 .foregroundStyle(.gray)
 
-            VStack{
+            VStack(alignment: .trailing){
                 Text.init(timerInterval:  Date.now...Date(timeInterval: Double(context.state.secondsRemaining), since: .now), pauseTime: context.state.endTime)
                 .font(.system(size: 30, weight: .bold, design: .default))
                 .padding(.horizontal, 40)
-                //.frame(maxWidth: .infinity, alignment: .center)
+                .frame(maxWidth: .infinity, alignment: .center)
                 .multilineTextAlignment(.trailing)
             }
             .frame(alignment: .trailing)
