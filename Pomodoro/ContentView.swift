@@ -60,13 +60,6 @@ struct ContentView: View {
                             }
                             ToolbarItem(placement: .confirmationAction){
                                 Button("Done"){
-                                   /**
-                                    if tabs[0].lengthInMinutes != editingTab[0].lengthInMinutes || tabs[1].lengthInMinutes != editingTab[1].lengthInMinutes || tabs[2].lengthInMinutes != editingTab[2].lengthInMinutes {
-                                        pomodoroSessionTimer.shouldResetTimer = true
-                                        shortBreakSessionTimer.shouldResetTimer = true
-                                        longBreakSessionTimer.shouldResetTimer = true
-                                    }  **/
-                                    
                                     if tabs[0].lengthInMinutes != editingTab[0].lengthInMinutes {
                                         pomodoroSessionTimer.shouldResetTimer = true
                                     }

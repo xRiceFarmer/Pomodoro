@@ -23,8 +23,8 @@ struct TabDetails: Codable, Identifiable, Hashable {
 }
 extension TabDetails{
     static let defaultData: [TabDetails] = [
-        TabDetails(name: "Pomodoro", theme: .magenta, lengthInMinutes: 25),
-        TabDetails(name: "Short Break", theme: .periwinkle, lengthInMinutes: 5),
-        TabDetails(name: "Long Break", theme: .bubblegum, lengthInMinutes: 10)
+        TabDetails(name: "Pomodoro", theme: .buttercup, lengthInMinutes: 25),
+        TabDetails(name: "Short Break", theme: .seafoam, lengthInMinutes: 5),
+        TabDetails(name: "Long Break", theme: .lavender, lengthInMinutes: 10)
     ]
 }

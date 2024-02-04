@@ -19,7 +19,6 @@ final class PomodoroTimer: ObservableObject {
     private var frequency: TimeInterval { 1.0 }
 
     private weak var timer: Timer?
-    private var timerStopped = false
     private var startDate: Date?
 
     init(lengthInMinutes: Int = 0) {
@@ -29,7 +28,6 @@ final class PomodoroTimer: ObservableObject {
 
     func startCountdown() {
         timerFired = true
-        timerStopped = false
         startDate = Date()
         timer = Timer.scheduledTimer(withTimeInterval: frequency, repeats: true) { [weak self] timer in
             self?.update()
@@ -39,7 +37,6 @@ final class PomodoroTimer: ObservableObject {
     
     func stopCountdown(){
         timer?.invalidate()
-        timerStopped = true
     }
     nonisolated private func update() {
 

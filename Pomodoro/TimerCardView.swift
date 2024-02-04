@@ -19,7 +19,6 @@ struct TimerCardView: View {
     
     @Binding var newTimerStarted : Bool
 
-    //@State private var secondsElapsedCache = 0
     
     var body: some View {
         
@@ -118,7 +117,6 @@ struct TimerCardView: View {
         pomodoroTimer.reset(lengthInMinutes: lengthInMinutes)
         stopTimer()
         isTrackingTime = false
-        //print("timerFired: \(pomodoroTimer.timerFired)")
 
     }
     private func startCountdown() {
@@ -140,10 +138,6 @@ struct TimerCardView: View {
         let state = TimerAttributes.ContentState(endTime: endTime, secondsRemaining: pomodoroTimer.secondsRemaining, sessionName: selectedTab.name, theme: selectedTab.theme)
         let content = ActivityContent(state: state, staleDate: nil)
         activity = try? Activity.request(attributes: attributes, content: content, pushType: nil)
-            
-        
-        
-        //print("timerFired: \(pomodoroTimer.timerFired)")
     }
     func formatTime(seconds: Int) -> String {
         let minutes = seconds / 60
@@ -153,7 +147,6 @@ struct TimerCardView: View {
     func movingToBackground() {
         print("Moving to the background")
         notificationDate = Date()
-        //secondsElapsedCache = pomodoroTimer.secondsElapsed
         pomodoroTimer.stopCountdown()
     }
     func movingToForeground() {
@@ -171,7 +164,7 @@ struct TimerCardView: View {
             let tempSecondsRemaining = max(lengthInMinutes * 60 - pomodoroTimer.secondsElapsed, 0)
             pomodoroTimer.startCountdown()
             
-                //sync live activity with restarted timer
+            //sync live activity with restarted timer
             endTime = Date.now
             let attributes = TimerAttributes()
             guard let endTime else { return }

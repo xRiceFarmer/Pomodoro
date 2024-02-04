@@ -9,10 +9,6 @@ struct TimerWidget: Widget {
             TimerWidgetView(context: context)
         } dynamicIsland: { context in
             DynamicIsland {
-                /**DynamicIslandExpandedRegion(.center){
-                    Image("pomodoroIcon")
-                        .frame(maxWidth: .minimum(70, 70), alignment: .leading)
-                 }**/
                 DynamicIslandExpandedRegion(.leading){
                     VStack{
                         ProgressView(
@@ -82,7 +78,7 @@ struct TimerWidget: Widget {
                 Text.init(timerInterval:  Date.now...Date(timeInterval: Double(context.state.secondsRemaining), since: .now), pauseTime: context.state.endTime)
                     .frame(maxWidth: .minimum(50, 50), alignment: .leading)
             } minimal: {
-           
+                
             }
         }
     }
@@ -99,16 +95,17 @@ struct TimerWidgetView: View {
                 .font(.system(size: 18, weight: .bold, design: .default))
                 .foregroundStyle(.gray)
 
-            VStack(alignment: .trailing){
+            VStack(alignment: .leading){
                 Text.init(timerInterval:  Date.now...Date(timeInterval: Double(context.state.secondsRemaining), since: .now), pauseTime: context.state.endTime)
+                .fixedSize(horizontal: false, vertical: true)
                 .font(.system(size: 30, weight: .bold, design: .default))
                 .padding(.horizontal, 40)
+                .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .center)
-                .multilineTextAlignment(.trailing)
+                .multilineTextAlignment(.leading)
             }
-            .frame(alignment: .trailing)
-            Spacer()
         }
+        .frame(alignment: .trailing)
     }
 }
 
