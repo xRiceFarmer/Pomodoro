@@ -11,6 +11,9 @@ import SwiftUI
 struct PomodoroApp: App {
     @StateObject private var store = TabStore()
     @State private var errorWrapper: ErrorWrapper?
+    
+    
+    
     var body: some Scene {
         WindowGroup {
             ContentView(tabs: $store.tabs){
@@ -32,7 +35,7 @@ struct PomodoroApp: App {
             .sheet(item: $errorWrapper){
                 store.tabs = TabDetails.defaultData
             } content: {wrapper in
-                    ErrorView(errorWrapper: wrapper)
+                ErrorView(errorWrapper: wrapper)
             }
         }
     }
