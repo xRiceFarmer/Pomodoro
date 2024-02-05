@@ -81,15 +81,15 @@ The app's main menu features three instances of a custom card view called TimerC
 ``` swift
 
 TabView(selection: $selectedTabIndex){
-TimerCardView(tabs: $tabs, selectedTab: $tabs[0], lengthInMinutes: $tabs[0].lengthInMinutes, pomodoroTimer: pomodoroSessionTimer, newTimerStarted: $newPomodoroTimerStarted)
-.tag(0)
-.padding()
-TimerCardView(tabs: $tabs, selectedTab: $tabs[1], lengthInMinutes: $tabs[1].lengthInMinutes, pomodoroTimer: shortBreakSessionTimer, newTimerStarted: $newShortBreakTimerStarted)
-.tag(1)
-.padding()
-TimerCardView(tabs: $tabs, selectedTab: $tabs[2], lengthInMinutes: $tabs[2].lengthInMinutes, pomodoroTimer: longBreakSessionTimer, newTimerStarted: $newLongBreakTimerStarted)
-.tag(2)
-.padding()
+    TimerCardView(tabs: $tabs, selectedTab: $tabs[0], lengthInMinutes: $tabs[0].lengthInMinutes, pomodoroTimer: pomodoroSessionTimer, newTimerStarted: $newPomodoroTimerStarted)
+        .tag(0)
+        .padding()
+    TimerCardView(tabs: $tabs, selectedTab: $tabs[1], lengthInMinutes: $tabs[1].lengthInMinutes, pomodoroTimer: shortBreakSessionTimer, newTimerStarted: $newShortBreakTimerStarted)
+        .tag(1)
+        .padding()
+    TimerCardView(tabs: $tabs, selectedTab: $tabs[2], lengthInMinutes: $tabs[2].lengthInMinutes, pomodoroTimer: longBreakSessionTimer, newTimerStarted: $newLongBreakTimerStarted)
+        .tag(2)
+        .padding()
 }
 
 ```
