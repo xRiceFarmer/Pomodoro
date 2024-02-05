@@ -1,12 +1,6 @@
-//
-//  ThemePicker.swift
-//  Scrumdinger
-//
-//  Created by Thái Khang on 10/01/2024.
-//
-
 import SwiftUI
 
+//Borrowed from Apple's Scrumdinger Project
 struct ThemePicker: View {
     @Binding var selection: Theme
     var body: some View {

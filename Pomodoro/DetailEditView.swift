@@ -9,10 +9,6 @@ import SwiftUI
 
 struct DetailEditView: View {
     @Binding var tabs: [TabDetails]
-    //@State private var editedPomodoroSeconds: Int = Tab.pomodoro.defaultSecondValue
-       // @State private var editedShortBreakSeconds: Int = Tab.shortBreak.defaultSecondValue
-        //@State private var editedLongBreakSeconds: Int = Tab.longBreak.defaultSecondValue
-
     var body: some View {
         Form {
             Section(header: Text(tabs[0].name)){

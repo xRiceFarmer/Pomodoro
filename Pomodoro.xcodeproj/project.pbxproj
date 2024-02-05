@@ -18,6 +18,7 @@
 		0C69C03E2B6BBB6800A65950 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C69C0312B68EA9500A65950 /* ProgressBar.swift */; };
 		0C69C03F2B6BBBC500A65950 /* PomodoroTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C90816D2B5610D300B1AA9D /* PomodoroTimer.swift */; };
 		0C8E7DE02B6F961E000B7907 /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E7DDF2B6F961E000B7907 /* WelcomeScreen.swift */; };
+		0C8E7DE22B70948B000B7907 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C8E7DE12B70948B000B7907 /* README.md */; };
 		0C90816E2B5610D300B1AA9D /* PomodoroTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C90816D2B5610D300B1AA9D /* PomodoroTimer.swift */; };
 		0C9BDA4C2B5AD3990031B6AF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C9BDA2A2B597F070031B6AF /* WidgetKit.framework */; };
 		0C9BDA4D2B5AD3990031B6AF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C9BDA2C2B597F070031B6AF /* SwiftUI.framework */; };
@@ -67,6 +68,7 @@
 		0C69C0332B68FC1400A65950 /* ThemePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemePicker.swift; sourceTree = "<group>"; };
 		0C69C0352B68FC5E00A65950 /* ThemeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
 		0C8E7DDF2B6F961E000B7907 /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
+		0C8E7DE12B70948B000B7907 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0C90816D2B5610D300B1AA9D /* PomodoroTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimer.swift; sourceTree = "<group>"; };
 		0C9BDA2A2B597F070031B6AF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		0C9BDA2C2B597F070031B6AF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -133,6 +135,7 @@
 		0CD8348E2B54E4B400FD2C3B = {
 			isa = PBXGroup;
 			children = (
+				0C8E7DE12B70948B000B7907 /* README.md */,
 				0CAC838A2B62A74D00BE57E5 /* TabDetails.swift */,
 				0CD834992B54E4B400FD2C3B /* Pomodoro */,
 				0C9BDA4E2B5AD3990031B6AF /* TimerWidget */,
@@ -279,6 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C8E7DE22B70948B000B7907 /* README.md in Resources */,
 				0CD834A22B54E4B500FD2C3B /* Preview Assets.xcassets in Resources */,
 				0CE13EA72B6388050090FB5E /* Assets.xcassets in Resources */,
 			);

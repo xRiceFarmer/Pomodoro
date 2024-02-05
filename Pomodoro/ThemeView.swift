@@ -1,10 +1,4 @@
-//
-//  ThemeView.swift
-//  Scrumdinger
-//
-//  Created by Thái Khang on 10/01/2024.
-//
-
+//Borrowed from Apple's Scrumdinger Project
 import SwiftUI
 struct ThemeView: View {
     let theme: Theme
