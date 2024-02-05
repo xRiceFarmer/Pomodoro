@@ -173,7 +173,6 @@ struct TimerCardView: View {
             activity = try? Activity.request(attributes: attributes, content: content, pushType: nil)
         }
     }
-       
 }
 
 #Preview {
