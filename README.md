@@ -43,7 +43,8 @@ These files establish the main structure of the Pomodoro timer application, hand
 ### TabDetails.swift, TabStore.swift
 For storing data, I created a TabDetails struct containing session lengths and themes. I've included a default dataset to set up the app for first-time users. The theme is a custom struct borrowed from Apple's iOS development tutorial course. I also adjusted the ScrumStore function to persist user changes to tab settings.
 
-```
+``` swift
+
 struct TabDetails: Codable, Identifiable, Hashable {
     let id: UUID
     var name : String
@@ -76,7 +77,8 @@ extension TabDetails{
 
 ### ContentView.swift
 The app's main menu features three instances of a custom card view called TimerCardView. Each instance receives the tabs binding variable passed down from the PomodoroApp struct, as well as the session appearing on screen, its duration, a timer instance, and a boolean to determine if a new timer has started to reset other running timers.
-```
+
+``` swift
                 TabView(selection: $selectedTabIndex){
                     TimerCardView(tabs: $tabs, selectedTab: $tabs[0], lengthInMinutes: $tabs[0].lengthInMinutes, pomodoroTimer: pomodoroSessionTimer, newTimerStarted: $newPomodoroTimerStarted)
                         .tag(0)
@@ -104,12 +106,13 @@ Before exploring the TimerCardView struct, let's examine the core of the app: th
 This view utilizes the secondsRemaining and secondsElapsed values to update the progress bar and TimerWidget for live activities. It also includes start, stop, and reset functions that call corresponding functions in the PomodoroTimer class and update live activities. When the timer hits zero, the view checks the timerFired value, calls the stopTimer function, and sets isTrackingTime to false, transitioning the stop button back to the start button. The shouldResetTimer variable from the PomodoroTimer class indicates when to reset the timer, triggered when a new timer starts while another is still running or when the user finishes editing the timer.
 
 To handle background operations, I implemented two onReceive modifiers for know whether the app is inactive. When the user quits the app, the function records the last time the app checked the timer status. Upon returning to the foreground, it calculates the accumulated time and restarts the timer, updating live activities for synchronization.
-```
+```swift
+
 import UserNotifications
 
 ```
 
-```
+``` swift
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
             movingToBackground()
         }
@@ -120,7 +123,9 @@ import UserNotifications
 
 ### TimerAttributes.swift, TimerWidgetBundle.swift, TimerWidget.swift
 Supporting live activities and the dynamic island, I've implemented ActivityKit. The ActivityAttributes include endTime, secondsRemaining, session name, and theme. Only two of which are being used in the live activities, i haven’t find a way to pass a color to the TImerWidget since type Color does not conform to Codable protocol. And since i borrowed some Live activities code from the internet, i didn’t modify the endTime variable since it will probably messes the function up.
-```
+
+``` swift
+
 struct TimerAttributes: ActivityAttributes{
     public typealias TimerStatus = ContentState
     
