@@ -79,18 +79,19 @@ extension TabDetails{
 The app's main menu features three instances of a custom card view called TimerCardView. Each instance receives the tabs binding variable passed down from the PomodoroApp struct, as well as the session appearing on screen, its duration, a timer instance, and a boolean to determine if a new timer has started to reset other running timers.
 
 ``` swift
-                TabView(selection: $selectedTabIndex){
-                    TimerCardView(tabs: $tabs, selectedTab: $tabs[0], lengthInMinutes: $tabs[0].lengthInMinutes, pomodoroTimer: pomodoroSessionTimer, newTimerStarted: $newPomodoroTimerStarted)
-                        .tag(0)
-                        .padding()
-                    TimerCardView(tabs: $tabs, selectedTab: $tabs[1], lengthInMinutes: $tabs[1].lengthInMinutes, pomodoroTimer: shortBreakSessionTimer, newTimerStarted: $newShortBreakTimerStarted)
-                        .tag(1)
-                        .padding()
-                    TimerCardView(tabs: $tabs, selectedTab: $tabs[2], lengthInMinutes: $tabs[2].lengthInMinutes, pomodoroTimer: longBreakSessionTimer, newTimerStarted: $newLongBreakTimerStarted)
-                        .tag(2)
-                        .padding()
-                    
-                }
+
+TabView(selection: $selectedTabIndex){
+TimerCardView(tabs: $tabs, selectedTab: $tabs[0], lengthInMinutes: $tabs[0].lengthInMinutes, pomodoroTimer: pomodoroSessionTimer, newTimerStarted: $newPomodoroTimerStarted)
+.tag(0)
+.padding()
+TimerCardView(tabs: $tabs, selectedTab: $tabs[1], lengthInMinutes: $tabs[1].lengthInMinutes, pomodoroTimer: shortBreakSessionTimer, newTimerStarted: $newShortBreakTimerStarted)
+.tag(1)
+.padding()
+TimerCardView(tabs: $tabs, selectedTab: $tabs[2], lengthInMinutes: $tabs[2].lengthInMinutes, pomodoroTimer: longBreakSessionTimer, newTimerStarted: $newLongBreakTimerStarted)
+.tag(2)
+.padding()
+}
+
 ```
 
 ### CustomTabBar.swift
@@ -113,12 +114,12 @@ import UserNotifications
 ```
 
 ``` swift
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
-            movingToBackground()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            movingToForeground()
-        }
+.onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
+movingToBackground()
+}
+.onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+movingToForeground()
+}
 ```
 
 ### TimerAttributes.swift, TimerWidgetBundle.swift, TimerWidget.swift
