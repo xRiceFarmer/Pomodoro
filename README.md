@@ -1,6 +1,6 @@
 # Pomodoro Timer
-#### Video Demo:  <URL HERE>
-#### Description:
+## Video Demo:  <URL HERE>
+## Description:
 The Pomodoro Method is one of the most efficient ways of learning through dividing work/study sessions into manageable chunks of time. One can use a traditional timer or the default timer app on the phone to practice this method. This app helps facilitates this by providing an intuitive way of managing, with designated tabs for each session: Pomodoro, Short Break and Long Break. Moreover, the app supports Live Activities and Dynamic Island, making the app a more immersive experience. The app is available on iOS 17.2 and later
 
 ## Features
@@ -22,6 +22,7 @@ Clone the repository and open the project in Xcode. Build and run the app on you
 6. Customize the app theme and settings as desired.
 
 ##How the app works
+
 ###Launching the app
 While creating the app, I always had user experience in mind. So in the code i have implemented plenty of logic and functions that keeps the app easy to use. When the app is first launched, the user is immediately welcomed with an onboarding sheet that explains how to best utilise this app. After clicking Continue, the main screen appears with 3 colorful cards representing 3 different time intervals. The welcome screen will not appear again in after uses unless the user hits the info button on the top right corner.
 
