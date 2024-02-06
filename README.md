@@ -1,6 +1,6 @@
 # CS50 Final Project: Pomodoro Timer
 ## Video Demo  https://youtu.be/IhxhOfnz-GI
-<iframe width="560" height="315" src="https://www.youtube.com/embed/IhxhOfnz-GI?si=Gb4yiItt5JjA0Tm8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 ## Description
 The Pomodoro Method is one of the most efficient ways of learning through dividing work/study sessions into manageable chunks of time. One can use a traditional timer or the default timer app on the phone to practice this method. This app helps facilitates this by providing an intuitive way of managing, with designated tabs for each session: Pomodoro, Short Break and Long Break. Moreover, the app supports Live Activities and Dynamic Island, making the app a more immersive experience. The app is available on iOS 17.2 and later
 
